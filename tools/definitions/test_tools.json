@@ -1,0 +1,36 @@
+{
+    "tools": [
+        {
+            "name": "calculate",
+            "description": "执行数学计算",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "expression": {
+                        "type": "string",
+                        "description": "数学表达式，例如：2+3*4"
+                    }
+                },
+                "required": [
+                    "expression"
+                ]
+            }
+        },
+        {
+            "name": "greet_user",
+            "description": "向用户问好",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "用户姓名"
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            }
+        }
+    ]
+}

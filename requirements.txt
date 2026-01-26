@@ -1,0 +1,9 @@
+python -m vulscan.test.test \ --output_dir results/test_wsl \ --dataset_path ./datasets/test/function_level/ \ --language python \ --model UCSB-SURFI/VulnLLM-R-7B \ --save --use_cot --vllm --batch_size 1
+
+
+python -m vulscan.test.test \
+--output_dir results/test_wsl \
+--dataset_path ./datasets/test/function_level/ \
+--language python \
+--model UCSB-SURFI/VulnLLM-R-7B \
+--save --use_cot --vllm --batch_size 1

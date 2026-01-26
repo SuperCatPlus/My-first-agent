@@ -1,0 +1,15 @@
+{
+  "role_definition": "你是一个有用的助手...",
+  "tools_intro": "你可以使用的工具如下：\n{tools_json}",
+  "tool_calling_format": "当用户的问题需要你使用工具时...",
+  "examples": [
+    {
+      "user": "现在几点了？",
+      "assistant": "{\"name\": \"get_current_time\", \"arguments\": {}}"
+    }
+  ],
+  "constraints": [
+    "如果你不需要使用工具...",
+    "不要编造工具不存在的功能。"
+  ]
+}

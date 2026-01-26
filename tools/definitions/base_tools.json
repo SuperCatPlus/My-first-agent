@@ -1,0 +1,22 @@
+{
+    "tools": [
+        {
+            "name": "get_current_time",
+            "description": "获取当前日期和时间",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "timezone": {
+                        "type": "string",
+                        "description": "时区，例如：Asia/Shanghai"
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "时间格式，例如：%Y-%m-%d %H:%M:%S"
+                    }
+                },
+                "required": []
+            }
+        }
+    ]
+}
