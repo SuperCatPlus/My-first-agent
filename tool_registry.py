@@ -33,55 +33,103 @@ class ToolRegistry:
                             print(f"已加载工具定义: {tool_name}")
             except Exception as e:
                 print(f"加载工具定义文件失败 {json_file}: {e}")
+
+    # def load_tool_implementations(self) -> None:
+    #     """加载所有工具实现"""
+    #     implementations_dir = Path(self.config.TOOLS_IMPLEMENTATIONS_DIR)
+        
+    #     if not implementations_dir.exists():
+    #         raise FileNotFoundError(f"工具实现目录不存在: {implementations_dir}")
+        
+    #     # 添加工具实现目录到Python路径
+    #     sys.path.insert(0, str(implementations_dir.parent))
+        
+    #     try:
+    #         # 动态导入工具实现模块
+    #         for py_file in implementations_dir.glob("*.py"):
+    #             if py_file.name == "__init__.py":
+    #                 continue
+                    
+    #             module_name = py_file.stem
+    #             try:
+    #                 # 导入模块
+    #                 spec = importlib.util.spec_from_file_location(
+    #                     module_name, 
+    #                     py_file
+    #                 )
+    #                 module = importlib.util.module_from_spec(spec)
+    #                 spec.loader.exec_module(module)
+                    
+    #                 # 查找并注册工具类
+    #                 for attr_name in dir(module):
+    #                     attr = getattr(module, attr_name)
+    #                     if isinstance(attr, type) and hasattr(attr, '__module__'):
+    #                         # 获取工具类的所有静态方法
+    #                         for method_name in dir(attr):
+    #                             method = getattr(attr, method_name)
+    #                             if (callable(method) and 
+    #                                 not method_name.startswith('_') and
+    #                                 method_name in self.tools):
+                                    
+    #                                 self.implementations[method_name] = method
+    #                                 print(f"已加载工具实现: {method_name}")
+                                    
+    #             except Exception as e:
+    #                 print(f"❌️加载工具实现模块失败 {module_name}: {e}")
+                    
+    #     finally:
+    #         # 恢复Python路径
+    #         if str(implementations_dir.parent) in sys.path:
+    #             sys.path.remove(str(implementations_dir.parent))
     
     def load_tool_implementations(self) -> None:
         """加载所有工具实现"""
-        implementations_dir = Path(self.config.TOOLS_IMPLEMENTATIONS_DIR)
+        import sys
+        from pathlib import Path
         
-        if not implementations_dir.exists():
-            raise FileNotFoundError(f"工具实现目录不存在: {implementations_dir}")
+        # 获取项目根目录
+        project_root = Path(__file__).parent.parent
         
-        # 添加工具实现目录到Python路径
-        sys.path.insert(0, str(implementations_dir.parent))
+        # 将项目根目录添加到 sys.path
+        sys.path.insert(0, str(project_root))
         
         try:
-            # 动态导入工具实现模块
-            for py_file in implementations_dir.glob("*.py"):
-                if py_file.name == "__init__.py":
-                    continue
-                    
-                module_name = py_file.stem
-                try:
-                    # 导入模块
-                    spec = importlib.util.spec_from_file_location(
-                        module_name, 
-                        py_file
-                    )
-                    module = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(module)
-                    
-                    # 查找并注册工具类
-                    for attr_name in dir(module):
-                        attr = getattr(module, attr_name)
-                        if isinstance(attr, type) and hasattr(attr, '__module__'):
-                            # 获取工具类的所有静态方法
-                            for method_name in dir(attr):
-                                method = getattr(attr, method_name)
-                                if (callable(method) and 
-                                    not method_name.startswith('_') and
-                                    method_name in self.tools):
-                                    
-                                    self.implementations[method_name] = method
-                                    print(f"已加载工具实现: {method_name}")
-                                    
-                except Exception as e:
-                    print(f"加载工具实现模块失败 {module_name}: {e}")
-                    
+            # 导入 tools.implementations 包
+            import tools.implementations as tools_impl
+            
+            # 从包中获取所有模块
+            import pkgutil
+            import inspect
+            
+            for _, module_name, is_pkg in pkgutil.iter_modules(tools_impl.__path__):
+                if not is_pkg and module_name != "__pycache__":
+                    try:
+                        module = __import__(f"tools.implementations.{module_name}", fromlist=[""])
+                        
+                        # 查找并注册工具类
+                        for name, obj in inspect.getmembers(module):
+                            if inspect.isclass(obj):
+                                # 检查是否为工具类
+                                for method_name in dir(obj):
+                                    if (not method_name.startswith('_') and 
+                                        method_name in self.tools):
+                                        method = getattr(obj, method_name)
+                                        if callable(method):
+                                            self.implementations[method_name] = method
+                                            print(f"已加载工具实现: {method_name}")
+                                            
+                    except Exception as e:
+                        print(f"加载工具模块失败 {module_name}: {e}")
+                        
+        except Exception as e:
+            print(f"导入工具包失败: {e}")
         finally:
-            # 恢复Python路径
-            if str(implementations_dir.parent) in sys.path:
-                sys.path.remove(str(implementations_dir.parent))
-    
+            # 清理 sys.path
+            if str(project_root) in sys.path:
+                sys.path.remove(str(project_root))
+
+
+
     def get_tool(self, tool_name: str) -> Callable:
         """获取工具实现函数"""
         return self.implementations.get(tool_name)
@@ -96,7 +144,33 @@ class ToolRegistry:
         if not tool_func:
             raise ValueError(f"工具未找到: {tool_name}")
         
-        return tool_func(**kwargs)
+        # 检查是否是异步函数
+        import inspect
+        import asyncio
+        
+        # 打印调试信息
+        print(f"执行工具: {tool_name}")
+        print(f"工具函数: {tool_func}")
+        print(f"是否为协程函数: {inspect.iscoroutinefunction(tool_func)}")
+        
+        if inspect.iscoroutinefunction(tool_func):
+            # 异步函数需要在事件循环中执行
+            try:
+                result = asyncio.run(tool_func(**kwargs))
+                print(f"异步工具执行结果: {result}")
+                return result
+            except Exception as e:
+                print(f"执行异步工具失败: {e}")
+                raise
+        else:
+            # 同步函数直接执行
+            try:
+                result = tool_func(**kwargs)
+                print(f"同步工具执行结果: {result}")
+                return result
+            except Exception as e:
+                print(f"执行同步工具失败: {e}")
+                raise
     
     def load_all(self) -> None:
         """加载所有工具"""

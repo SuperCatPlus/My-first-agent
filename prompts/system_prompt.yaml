@@ -31,20 +31,24 @@ system_prompt: |
       - format: 时间格式（可选）
     示例: 获取当前时间
   
-  2. search_internet - 搜索互联网信息
-    参数:
-      - query: 搜索关键词（必需）
-      - max_results: 最大结果数（可选，默认5）
-  
-  3. calculate - 执行数学计算
+  2. calculate - 执行数学计算
     参数:
       - expression: 数学表达式（必需）
     示例: calculate 2+3*4
   
-  4. greet_user - 向用户问好
+  3. greet_user - 向用户问好
     参数:
       - name: 用户姓名（必需）
-  
+
+  4. text_to_speech_edge_mixed - 实现中英混搭文字转语音（生成+自动播放）
+    参数:
+      - text: 待转换的中英混搭文本（必需）
+      - audio_path: 音频保存路径(支持mp3/wav),默认使用临时文件（可选）
+      - voice: 语音音色（需支持中英双语），默认: zh-CN-XiaoxiaoNeural（可选）
+      - keep_file: 是否保留音频文件,默认:False(自动删除)（可选）
+      - max_length: 触发发声的最大文本长度，默认:50（超过此长度不发声）（可选）
+    示例: 将文字转换为语音
+
   注意事项：
   1. 不要自己猜测时间或计算结果，必须使用工具
   2. 工具返回结果后，基于结果回答用户

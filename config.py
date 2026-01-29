@@ -5,7 +5,7 @@ from typing import Dict, Any
 
 # 全局日志配置（只初始化一次）
 logging.basicConfig(
-    filename='API.log',  
+    filename='Function.log',  
     filemode='a',  
     level=logging.INFO,
     format='%(asctime)s - %(module)s - %(funcName)s - %(levelname)s: %(message)s',  
@@ -19,7 +19,7 @@ class Config:
 
     # Ollama API配置
     OLLAMA_API_BASE = "http://localhost:11434/api"
-    MODEL_NAME = "qwen3:14b"  # 可根据实际情况修改为qwen、mistral等
+    MODEL_NAME = "qwen3:8b"  # 可根据实际情况修改为qwen、mistral等
     
     # 工具配置
     TOOLS_DEFINITIONS_DIR = "tools/definitions"

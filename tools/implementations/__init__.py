@@ -1,3 +1,7 @@
+# tools/implementations/__init__.py
+from .log_decorator import log_tool_call
 from .base_tools import BaseTools
 from .math_tools import MathTools
-__all__ = ['BaseTools', 'MathTools', 'VoiceTools']
+from .voice_tools import VoiceTools
+
+__all__ = ['log_tool_call', 'BaseTools', 'MathTools', 'VoiceTools']

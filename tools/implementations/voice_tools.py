@@ -2,10 +2,10 @@ import edge_tts
 import os
 import tempfile
 import logging
+import asyncio
 from typing import Dict, Any, Optional
-from .log_decorator import log_tool_call
 # 配置日志：输出到文件，定义格式和级别
-
+from . import log_tool_call
 
 # 定义默认配置
 DEFAULT_VOICE = "zh-CN-XiaoxiaoNeural"
@@ -16,11 +16,12 @@ class VoiceTools:
     
     @staticmethod
     @log_tool_call
-    async def text_to_speech_edge_mixed(
+    def text_to_speech_edge_mixed(
         text: str, 
         audio_path: Optional[str] = None, 
         voice: Optional[str] = None,
-        keep_file: bool = False
+        keep_file: bool = False,
+        max_length: int = 50
     ) -> Dict[str, Any]:
         """
         edge-tts 实现中英混搭文字转语音（生成+自动播放）
@@ -30,6 +31,7 @@ class VoiceTools:
             audio_path: 音频保存路径(支持mp3/wav),默认使用临时文件
             voice: 语音音色（需支持中英双语），默认: zh-CN-XiaoxiaoNeural
             keep_file: 是否保留音频文件,默认:False(自动删除)
+            max_length: 触发发声的最大文本长度，默认:50（超过此长度不发声）
             
         Returns:
             包含语音合成结果的字典
@@ -49,6 +51,20 @@ class VoiceTools:
         # 设置默认值
         use_voice = voice or DEFAULT_VOICE
         use_audio_path = audio_path
+        text_length = len(text)
+        
+        # 检查文本长度：超过max_length则不发声
+        if text_length > max_length:
+            logging.info(f"文本长度({text_length})超过最大发声长度({max_length})，跳过语音合成")
+            return {
+                "success": True,
+                "message": "文本长度超过最大发声长度，已跳过语音合成",
+                "audio_path": None,
+                "voice": use_voice,
+                "text_length": text_length,
+                "keep_file": keep_file,
+                "max_length": max_length
+            }
         
         try:
             # 处理临时文件逻辑
@@ -57,17 +73,22 @@ class VoiceTools:
                 with tempfile.NamedTemporaryFile(suffix='.mp3', delete=False) as tmp:
                     use_audio_path = tmp.name
             
-            # 1. 初始化语音合成对象
-            logging.info(f"开始生成语音，文本：{text[:20]}... 音色：{use_voice}")
-            communicate = edge_tts.Communicate(
-                text=text,
-                voice=use_voice,
-                rate="+0%"  # 语速调整（-50%到+50%，0%为默认）
-            )
+            # 同步执行异步操作
+            def async_task():
+                # 1. 初始化语音合成对象
+                logging.info(f"开始生成语音，文本：{text[:20]}... 音色：{use_voice}")
+                communicate = edge_tts.Communicate(
+                    text=text,
+                    voice=use_voice,
+                    rate="+0%"  # 语速调整（-50%到+50%，0%为默认）
+                )
+                
+                # 2. 保存音频文件
+                asyncio.run(communicate.save(use_audio_path))
+                logging.info(f"音频文件保存成功：{use_audio_path}")
             
-            # 2. 保存音频文件
-            await communicate.save(use_audio_path)
-            logging.info(f"音频文件保存成功：{use_audio_path}")
+            # 执行异步任务
+            async_task()
             
             # 3. 自动播放音频
             print(f"正在播放音频：{use_audio_path}")
@@ -84,8 +105,9 @@ class VoiceTools:
                 "message": "音频生成并播放完成！",
                 "audio_path": use_audio_path if keep_file else "临时文件已删除",
                 "voice": use_voice,
-                "text_length": len(text),
-                "keep_file": keep_file
+                "text_length": text_length,
+                "keep_file": keep_file,
+                "max_length": max_length
             }
             
         except Exception as e:
@@ -108,8 +130,9 @@ class VoiceTools:
                 "error": error_msg,
                 "audio_path": use_audio_path,
                 "voice": use_voice,
-                "text_length": len(text) if 'text' in locals() else 0,
-                "keep_file": keep_file
+                "text_length": text_length,
+                "keep_file": keep_file,
+                "max_length": max_length
             }
 
 # 测试示例（可选）

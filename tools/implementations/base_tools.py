@@ -4,7 +4,7 @@ import pytz
 from typing import Dict, Any, Optional
 import requests
 
-from .log_decorator import log_tool_call
+from . import log_tool_call
 
 class BaseTools:
     """基础工具实现类"""

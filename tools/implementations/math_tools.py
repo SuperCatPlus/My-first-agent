@@ -1,7 +1,8 @@
 import math
 from typing import Dict, Any
-from .log_decorator import log_tool_call
+# from .log_decorator import log_tool_call
 
+from . import log_tool_call
 class MathTools:
     """数学工具实现类"""
     
@@ -48,6 +49,7 @@ class MathTools:
             }
     
     @staticmethod
+    @log_tool_call
     def greet_user(name: str) -> Dict[str, str]:
         """
         问候用户

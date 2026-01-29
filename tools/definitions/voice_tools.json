@@ -1,0 +1,36 @@
+{
+    "tools": [
+        {
+            "name": "text_to_speech_edge_mixed",
+            "description": "实现中英混搭文字转语音（生成+自动播放）",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "待转换的中英混搭文本"
+                    },
+                    "audio_path": {
+                        "type": "string",
+                        "description": "音频保存路径(支持mp3/wav),默认使用临时文件"
+                    },
+                    "voice": {
+                        "type": "string",
+                        "description": "语音音色（需支持中英双语），默认: zh-CN-XiaoxiaoNeural"
+                    },
+                    "keep_file": {
+                        "type": "boolean",
+                        "description": "是否保留音频文件,默认:False(自动删除)"
+                    },
+                    "max_length": {
+                        "type": "integer",
+                        "description": "触发发声的最大文本长度，默认:50（超过此长度不发声）"
+                    }
+                },
+                "required": [
+                    "text"
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,127 @@
+2026-01-27 10:48:18 - log_decorator - wrapper - INFO: 工具函数 get_current_time 开始调用 | 入参: args=(), kwargs={'timezone': 'Asia/Shanghai', 'format': '%H:%M:%S'}
+2026-01-27 10:48:20 - log_decorator - wrapper - INFO: 工具函数 get_current_time 调用成功 | 出参: {'current_time': '18:48:18', 'timestamp': '2026-01-27T18:48:18.811737+08:00', 'timezone': 'Asia/Shanghai', 'year': 2026, 'month': 1, 'day': 27, 'hour': 18, 'minute': 48, 'second': 18, 'weekday': 'Tuesday', 'success': True}
+2026-01-28 11:01:26 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好，欢迎使用语音工具！'}
+2026-01-28 11:01:26 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: <coroutine object VoiceTools.text_to_speech_edge_mixed at 0x000001AC42466340>
+2026-01-28 11:03:29 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好，欢迎使用语音工具！'}
+2026-01-28 11:03:29 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: <coroutine object VoiceTools.text_to_speech_edge_mixed at 0x0000021C8C02A340>
+2026-01-28 11:04:34 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好，欢迎使用语音工具！'}
+2026-01-28 11:04:34 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: <coroutine object VoiceTools.text_to_speech_edge_mixed at 0x000001C4C209A340>
+2026-01-28 11:05:03 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好，欢迎使用语音工具！'}
+2026-01-28 11:05:03 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: <coroutine object VoiceTools.text_to_speech_edge_mixed at 0x00000297EFE2A340>
+2026-01-28 11:05:52 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好，欢迎使用语音工具！'}
+2026-01-28 11:05:52 - voice_tools - async_task - INFO: 开始生成语音，文本：你好，欢迎使用语音工具！... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:05:54 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpo__5o899.mp3
+2026-01-28 11:05:57 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpo__5o899.mp3
+2026-01-28 11:05:57 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 12, 'keep_file': False}
+2026-01-28 11:06:27 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好，欢迎使用语音工具！'}
+2026-01-28 11:06:27 - voice_tools - async_task - INFO: 开始生成语音，文本：你好，欢迎使用语音工具！... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:06:29 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmp8h8vi16x.mp3
+2026-01-28 11:06:32 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmp8h8vi16x.mp3
+2026-01-28 11:06:32 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 12, 'keep_file': False}
+2026-01-28 11:09:55 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '当然可以，我会说话的', 'voice': 'zh-CN-XiaoxiaoNeural'}
+2026-01-28 11:09:55 - voice_tools - async_task - INFO: 开始生成语音，文本：当然可以，我会说话的... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:09:57 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpvwsdw60m.mp3
+2026-01-28 11:09:59 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpvwsdw60m.mp3
+2026-01-28 11:09:59 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 10, 'keep_file': False}
+2026-01-28 11:10:58 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好，有什么可以帮助你的吗？'}
+2026-01-28 11:10:58 - voice_tools - async_task - INFO: 开始生成语音，文本：你好，有什么可以帮助你的吗？... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:11:00 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpchk70mu0.mp3
+2026-01-28 11:11:03 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpchk70mu0.mp3
+2026-01-28 11:11:03 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 14, 'keep_file': False}
+2026-01-28 11:11:16 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '很高兴见到你！'}
+2026-01-28 11:11:16 - voice_tools - async_task - INFO: 开始生成语音，文本：很高兴见到你！... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:11:18 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpa5whrx_u.mp3
+2026-01-28 11:11:20 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpa5whrx_u.mp3
+2026-01-28 11:11:20 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 7, 'keep_file': False}
+2026-01-28 11:11:46 - log_decorator - wrapper - INFO: 工具函数 get_current_time 开始调用 | 入参: args=(), kwargs={'timezone': 'Asia/Shanghai', 'format': '%Y年%m月%d日'}
+2026-01-28 11:11:48 - log_decorator - wrapper - INFO: 工具函数 get_current_time 调用成功 | 出参: {'current_time': '2026年01月28日', 'timestamp': '2026-01-28T19:11:46.892616+08:00', 'timezone': 'Asia/Shanghai', 'year': 2026, 'month': 1, 'day': 28, 'hour': 19, 'minute': 11, 'second': 46, 'weekday': 'Wednesday', 'success': True}
+2026-01-28 11:23:09 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好，欢迎使用语音工具！'}
+2026-01-28 11:23:09 - voice_tools - async_task - INFO: 开始生成语音，文本：你好，欢迎使用语音工具！... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:23:12 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpvkltuq7i.mp3
+2026-01-28 11:23:15 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpvkltuq7i.mp3
+2026-01-28 11:23:15 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 12, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:28:48 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮助你的吗？', 'max_length': 50}
+2026-01-28 11:28:48 - voice_tools - async_task - INFO: 开始生成语音，文本：你好！有什么可以帮助你的吗？... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:28:50 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpnca47t5r.mp3
+2026-01-28 11:28:53 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpnca47t5r.mp3
+2026-01-28 11:28:53 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 14, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:29:35 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好！请问怎么称呼您？', 'max_length': 50}
+2026-01-28 11:29:35 - voice_tools - async_task - INFO: 开始生成语音，文本：你好！请问怎么称呼您？... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:29:37 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmprl7a05ya.mp3
+2026-01-28 11:29:40 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmprl7a05ya.mp3
+2026-01-28 11:29:40 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 11, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:30:01 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好！很高兴见到你。请问你的名字是？', 'max_length': 50}
+2026-01-28 11:30:01 - voice_tools - async_task - INFO: 开始生成语音，文本：你好！很高兴见到你。请问你的名字是？... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:30:03 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmp_tk3kl45.mp3
+2026-01-28 11:30:08 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmp_tk3kl45.mp3
+2026-01-28 11:30:08 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 18, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:31:11 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '耄耋'}
+2026-01-28 11:31:11 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '早上好，耄耋！', 'timestamp': '2026-01-28T11:31:11.577645'}
+2026-01-28 11:31:32 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮助你的吗？', 'max_length': 50}
+2026-01-28 11:31:32 - voice_tools - async_task - INFO: 开始生成语音，文本：你好！有什么可以帮助你的吗？... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:31:34 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpqpf8nezt.mp3
+2026-01-28 11:31:38 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpqpf8nezt.mp3
+2026-01-28 11:31:38 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 14, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:31:45 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '耄耋'}
+2026-01-28 11:31:45 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '早上好，耄耋！', 'timestamp': '2026-01-28T11:31:45.327421'}
+2026-01-28 11:32:08 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '耄耋'}
+2026-01-28 11:32:08 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '早上好，耄耋！', 'timestamp': '2026-01-28T11:32:08.818085'}
+2026-01-28 11:33:29 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '耄耋'}
+2026-01-28 11:33:29 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '早上好，耄耋！', 'timestamp': '2026-01-28T11:33:29.512002'}
+2026-01-28 11:40:08 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好，耄耋！很高兴认识你。有什么我可以帮助你的吗？', 'max_length': 50}
+2026-01-28 11:40:08 - voice_tools - async_task - INFO: 开始生成语音，文本：你好，耄耋！很高兴认识你。有什么我可以帮... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:40:10 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmp3i8csodm.mp3
+2026-01-28 11:40:16 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmp3i8csodm.mp3
+2026-01-28 11:40:16 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 25, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:40:29 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '耄耋'}
+2026-01-28 11:40:29 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '早上好，耄耋！', 'timestamp': '2026-01-28T11:40:29.610943'}
+2026-01-28 11:41:32 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '早上好，耄耋！😊 今天有什么我可以帮你的吗？', 'max_length': 50}
+2026-01-28 11:41:32 - voice_tools - async_task - INFO: 开始生成语音，文本：早上好，耄耋！😊 今天有什么我可以帮你的... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:41:33 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpplcjiwyr.mp3
+2026-01-28 11:41:39 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpplcjiwyr.mp3
+2026-01-28 11:41:39 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 22, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:42:07 - log_decorator - wrapper - INFO: 工具函数 get_current_time 开始调用 | 入参: args=(), kwargs={'timezone': 'Asia/Shanghai', 'format': '%Y年%m月%d日'}
+2026-01-28 11:42:07 - log_decorator - wrapper - INFO: 工具函数 get_current_time 调用成功 | 出参: {'current_time': '2026年01月28日', 'timestamp': '2026-01-28T19:42:07.298808+08:00', 'timezone': 'Asia/Shanghai', 'year': 2026, 'month': 1, 'day': 28, 'hour': 19, 'minute': 42, 'second': 7, 'weekday': 'Wednesday', 'success': True}
+2026-01-28 11:44:36 - log_decorator - wrapper - INFO: 工具函数 get_current_time 开始调用 | 入参: args=(), kwargs={}
+2026-01-28 11:44:36 - log_decorator - wrapper - INFO: 工具函数 get_current_time 调用成功 | 出参: {'current_time': '2026-01-28 11:44:36', 'timestamp': '2026-01-28T11:44:36.221393', 'timezone': 'local', 'year': 2026, 'month': 1, 'day': 28, 'hour': 11, 'minute': 44, 'second': 36, 'weekday': 'Wednesday', 'success': True}
+2026-01-28 11:44:38 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '今天是2026年1月28日，星期三。', 'max_length': 50}
+2026-01-28 11:44:38 - voice_tools - async_task - INFO: 开始生成语音，文本：今天是2026年1月28日，星期三。... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:44:39 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpmz4r1ycv.mp3
+2026-01-28 11:44:44 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpmz4r1ycv.mp3
+2026-01-28 11:44:44 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 18, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:46:08 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好！很高兴见到你。请问你的名字是？', 'max_length': 50}
+2026-01-28 11:46:08 - voice_tools - async_task - INFO: 开始生成语音，文本：你好！很高兴见到你。请问你的名字是？... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:46:10 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpc8lecucn.mp3
+2026-01-28 11:46:15 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpc8lecucn.mp3
+2026-01-28 11:46:15 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 18, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:46:35 - log_decorator - wrapper - INFO: 工具函数 get_current_time 开始调用 | 入参: args=(), kwargs={'timezone': 'Asia/Shanghai', 'format': '%Y年%m月%d日'}
+2026-01-28 11:46:35 - log_decorator - wrapper - INFO: 工具函数 get_current_time 调用成功 | 出参: {'current_time': '2026年01月28日', 'timestamp': '2026-01-28T19:46:35.380869+08:00', 'timezone': 'Asia/Shanghai', 'year': 2026, 'month': 1, 'day': 28, 'hour': 19, 'minute': 46, 'second': 35, 'weekday': 'Wednesday', 'success': True}
+2026-01-28 11:46:37 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '今天是2026年01月28日。黄练友先生，有什么我可以帮您的吗？', 'max_length': 50}
+2026-01-28 11:46:37 - voice_tools - async_task - INFO: 开始生成语音，文本：今天是2026年01月28日。黄练友先生... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:46:39 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmp034wbv_1.mp3
+2026-01-28 11:46:46 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmp034wbv_1.mp3
+2026-01-28 11:46:46 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 32, 'keep_file': False, 'max_length': 50}
+2026-01-28 11:57:09 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '黄练友'}
+2026-01-28 11:57:09 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '早上好，黄练友！', 'timestamp': '2026-01-28T11:57:09.798069'}
+2026-01-28 11:57:11 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '黄练友，你好！很高兴见到你。有什么我可以帮你的吗？', 'max_length': 50}
+2026-01-28 11:57:11 - voice_tools - async_task - INFO: 开始生成语音，文本：黄练友，你好！很高兴见到你。有什么我可以... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 11:57:12 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpg8vhjia1.mp3
+2026-01-28 11:57:19 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpg8vhjia1.mp3
+2026-01-28 11:57:19 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 25, 'keep_file': False, 'max_length': 50}
+2026-01-28 12:07:04 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮助你的吗？', 'max_length': 50}
+2026-01-28 12:07:04 - voice_tools - async_task - INFO: 开始生成语音，文本：你好！有什么可以帮助你的吗？... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 12:07:06 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmps46ezjz4.mp3
+2026-01-28 12:07:09 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmps46ezjz4.mp3
+2026-01-28 12:07:09 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 14, 'keep_file': False, 'max_length': 50}
+2026-01-28 13:53:06 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '耄耋'}
+2026-01-28 13:53:06 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '中午好，耄耋！', 'timestamp': '2026-01-28T13:53:06.654701'}
+2026-01-28 13:53:08 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮你的吗？', 'max_length': 1000}
+2026-01-28 13:53:08 - voice_tools - async_task - INFO: 开始生成语音，文本：你好！有什么可以帮你的吗？... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 13:53:10 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmp6qmlgwns.mp3
+2026-01-28 13:53:14 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmp6qmlgwns.mp3
+2026-01-28 13:53:14 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 13, 'keep_file': False, 'max_length': 1000}
+2026-01-28 13:58:32 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 开始调用 | 入参: args=(), kwargs={'text': '我目前没有获取天气信息的工具，无法提供天气情况。您是想询问某个具体地点的天气吗？或者需要我帮您做其他事情？', 'max_length': 1000}
+2026-01-28 13:58:32 - voice_tools - async_task - INFO: 开始生成语音，文本：我目前没有获取天气信息的工具，无法提供天... 音色：zh-CN-XiaoxiaoNeural
+2026-01-28 13:58:34 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpsknzej2u.mp3
+2026-01-28 13:58:45 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpsknzej2u.mp3
+2026-01-28 13:58:45 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 53, 'keep_file': False, 'max_length': 1000}

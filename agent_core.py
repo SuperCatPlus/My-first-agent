@@ -133,15 +133,47 @@ class AgentCore:
                 self.conversation_history.append({"role": "user", "content": user_message})
                 self.conversation_history.append({"role": "assistant", "content": final_message})
                 
+                # 自动语音播报：回复长度<=50字时发声，或用户输入包含"耄耋"时强制发声（工具调用后的回复）
+                should_speak = len(final_message) <= 50 or "耄耋" in user_message
+                if should_speak:
+                    try:
+                        # 自动调用语音工具朗读回复
+                        # 当用户输入包含"耄耋"时，设置max_length为较大值以强制发声
+                        max_length = 1000 if "耄耋" in user_message else 50
+                        self.tool_registry.execute_tool(
+                            "text_to_speech_edge_mixed",
+                            text=final_message,
+                            max_length=max_length
+                        )
+                    except Exception as e:
+                        # 语音播报失败不影响回复
+                        print(f"自动语音播报失败: {e}")
+                
                 return final_message
                 
             except Exception as e:
                 error_message = f"执行工具 {tool_name} 失败: {str(e)}"
                 return error_message
         else:
-            # 没有工具调用，直接返回响应
+            # 没有工具调用，检查回复长度并自动调用语音工具（短文本）
             self.conversation_history.append({"role": "user", "content": user_message})
             self.conversation_history.append({"role": "assistant", "content": assistant_message})
+            
+            # 自动语音播报：回复长度<=50字时发声，或用户输入包含"耄耋"时强制发声
+            should_speak = len(assistant_message) <= 50 or "耄耋" in user_message
+            if should_speak:
+                try:
+                    # 自动调用语音工具朗读回复
+                    # 当用户输入包含"耄耋"时，设置max_length为较大值以强制发声
+                    max_length = 1000 if "耄耋" in user_message else 50
+                    self.tool_registry.execute_tool(
+                        "text_to_speech_edge_mixed",
+                        text=assistant_message,
+                        max_length=max_length
+                    )
+                except Exception as e:
+                    # 语音播报失败不影响回复
+                    print(f"自动语音播报失败: {e}")
             
             return assistant_message
     

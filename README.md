@@ -8,6 +8,7 @@
 - 💬 交互式对话：支持多轮对话、历史记录管理
 - ⚡ 高效工具调用：自动解析模型响应并执行对应工具，返回结构化结果
 - 📝 可配置化：通过配置文件灵活调整模型参数、工具路径等
+- 🎤 智能语音播报：短文本自动发声，长文本不发声，提升用户体验
 
 ## 📋 目录结构
 ```
@@ -16,11 +17,13 @@ My_agent_project/
 │   ├── definitions/            # 工具定义（JSON格式，描述工具元信息）
 │   │   ├── base_tools.json     # 基础工具（时间、网络）
 │   │   ├── test_tools.json     # 测试工具
-│   │   └── math_tools.json     # 数学工具
+│   │   ├── math_tools.json     # 数学工具
+│   │   └── voice_tools.json    # 语音工具
 │   └── implementations/        # 工具实现（Python类，对应具体逻辑）
 │       ├── __init__.py
 │       ├── base_tools.py       # 基础工具实现（获取时间、网络搜索）
-│       └── math_tools.py       # 数学工具实现（计算、问候）
+│       ├── math_tools.py       # 数学工具实现（计算、问候）
+│       └── voice_tools.py      # 语音工具实现（文字转语音）
 ├── prompts/                    # 提示词目录
 │   └── system_prompt.yaml      # 系统提示词（定义工具调用规则）
 ├── config.py                   # 核心配置（模型、API、工具路径）
@@ -35,6 +38,7 @@ My_agent_project/
 - Python 3.8+
 - Ollama（已安装并运行，参考 [Ollama 官网](https://ollama.com/)）
 - 本地模型（如 qwen3:14b、mistral:7b 等，需提前通过 `ollama pull` 下载）
+- 语音播报依赖：edge-tts、playsound（用于文字转语音和播放）
 
 ## 🚀 安装步骤
 
@@ -68,7 +72,7 @@ cd My_agent_project
 ```bash
 pip install -r requirements.txt
 # 或手动安装核心依赖
-pip install requests pyyaml pytz
+pip install requests pyyaml pytz edge-tts playsound
 ```
 
 ## 📖 使用指南
@@ -99,6 +103,16 @@ python main.py --model qwen3:14b --query "计算 100*2 + 50/2"
 ### 3. 查看可用工具
 ```bash
 python main.py --list-tools
+```
+
+### 4. 语音播报功能
+智能体具有智能语音播报功能：
+- **自动播报**：当回复文本长度≤50字时，自动触发语音播报
+- **手动调用**：可通过工具调用格式手动触发语音播报
+
+```bash
+# 示例：手动触发语音播报
+python main.py --query "请将'你好，欢迎使用本地大模型智能体！'转换为语音"
 ```
 
 ## ⚙️ 配置说明
@@ -196,6 +210,12 @@ __all__ = ['BaseTools', 'MathTools', 'CustomTools']
 - 降低模型规模（如从 14B 换为 7B）
 - 调整 `MODEL_PARAMS` 中的 `max_tokens` 减小响应长度
 - 确保本地硬件满足模型运行要求（如足够的内存/显存）
+
+### Q4: 语音播报不工作？
+- 检查是否安装了语音依赖：`pip install edge-tts playsound`
+- 确认网络连接正常（edge-tts 需要联网）
+- 查看控制台输出，确认语音工具是否成功加载
+- 检查回复文本长度是否≤50字（默认设置）
 
 ## 📄 许可证
 （可选）补充你的开源许可证，如 MIT、Apache 2.0 等。

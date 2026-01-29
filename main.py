@@ -9,7 +9,7 @@ from config import config
 from tool_registry import ToolRegistry
 from agent_core import AgentCore
 
-def initialize_agent() -> AgentCore:
+def initialize_agent(check_ollama=True) -> AgentCore:
     """初始化智能体"""
     print("正在初始化智能体...")
     
@@ -24,16 +24,17 @@ def initialize_agent() -> AgentCore:
         sys.exit(1)
     
     # 检查Ollama服务
-    try:
-        response = requests.get(f"{config.OLLAMA_API_BASE}/tags", timeout=5)
-        if response.status_code != 200:
-            print("❌ Ollama服务可能未运行或无法访问")
-            print("请确保已启动Ollama: ollama serve")
+    if check_ollama:
+        try:
+            response = requests.get(f"{config.OLLAMA_API_BASE}/tags", timeout=5)
+            if response.status_code != 200:
+                print("❌ Ollama服务可能未运行或无法访问")
+                print("请确保已启动Ollama: ollama serve")
+                sys.exit(1)
+        except:
+            print("❌ 无法连接到Ollama服务")
+            print("请检查Ollama是否运行在 http://localhost:11434")
             sys.exit(1)
-    except:
-        print("❌ 无法连接到Ollama服务")
-        print("请检查Ollama是否运行在 http://localhost:11434")
-        sys.exit(1)
     
     # 初始化工具注册表
     try:
@@ -110,6 +111,8 @@ def main():
     parser.add_argument("--model", "-m", help="指定模型名称，覆盖配置文件")
     parser.add_argument("--list-tools", "-l", action="store_true", 
                        help="列出可用工具")
+    parser.add_argument("--test-tools", "-t", action="store_true", 
+                       help="测试工具加载（不连接Ollama服务）")
     
     args = parser.parse_args()
     
@@ -118,6 +121,16 @@ def main():
         config.MODEL_NAME = args.model
     
     try:
+        # 测试工具模式不检查Ollama服务
+        if args.test_tools:
+            agent = initialize_agent(check_ollama=False)
+            print("\n🛠️  可用工具列表:")
+            for i, (tool_name, tool_func) in enumerate(agent.tool_registry.implementations.items(), 1):
+                tool_def = agent.tool_registry.tools.get(tool_name, {})
+                description = tool_def.get('description', '无描述')
+                print(f"  {i}. {tool_name}: {description}")
+            return
+        
         agent = initialize_agent()
         
         # 如果指定了列出工具，显示后退出
