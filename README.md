@@ -9,6 +9,9 @@
 - ⚡ 高效工具调用：自动解析模型响应并执行对应工具，返回结构化结果
 - 📝 可配置化：通过配置文件灵活调整模型参数、工具路径等
 - 🎤 智能语音播报：短文本自动发声，长文本不发声，提升用户体验
+- 🌐 HTTP请求工具：支持发送GET、POST等HTTP请求到指定API接口
+- 📋 API列表管理：限制模型只能使用预定义的API列表，确保安全可控
+- 🔍 日志分析功能：调用/api/get-log-last-lines接口查看日志，检测渗透痕迹
 
 ## 📋 目录结构
 ```
@@ -18,14 +21,33 @@ My_agent_project/
 │   │   ├── base_tools.json     # 基础工具（时间、网络）
 │   │   ├── test_tools.json     # 测试工具
 │   │   ├── math_tools.json     # 数学工具
-│   │   └── voice_tools.json    # 语音工具
+│   │   ├── voice_tools.json    # 语音工具
+│   │   └── http_tools.json     # HTTP请求工具
+│   │
 │   └── implementations/        # 工具实现（Python类，对应具体逻辑）
 │       ├── __init__.py
 │       ├── base_tools.py       # 基础工具实现（获取时间、网络搜索）
 │       ├── math_tools.py       # 数学工具实现（计算、问候）
-│       └── voice_tools.py      # 语音工具实现（文字转语音）
+│       ├── voice_tools.py      # 语音工具实现（文字转语音）
+│       └── http_tools.py       # HTTP请求工具实现（发送HTTP请求）
+│
+├── api_config.json              # API列表配置（限制模型可使用的API）
+│ 
 ├── prompts/                    # 提示词目录
 │   └── system_prompt.yaml      # 系统提示词（定义工具调用规则）
+│
+├── utils_bin/                  # 工具二进制文件
+│   └── balcon/                 # Balcon TTS工具（离线语音播放）
+│       ├── balcon.exe          # Balcon主程序
+│       ├── SoundTouch.dll      # 依赖库
+│       ├── chsdet.dll          # 依赖库
+│       ├── lame.exe            # 依赖库
+│       ├── lame_enc.dll        # 依赖库
+│       └── libsamplerate.dll   # 依赖库
+│
+├── abandon/                    # 以被弃用的程序(不参与程序)
+│   └── voice_tools.py          # 旧版语音工具实现
+│
 ├── config.py                   # 核心配置（模型、API、工具路径）
 ├── tool_registry.py            # 工具注册表（加载/管理工具定义与实现）
 ├── agent_core.py               # 智能体核心（对话、工具调用、模型交互）
@@ -38,7 +60,7 @@ My_agent_project/
 - Python 3.8+
 - Ollama（已安装并运行，参考 [Ollama 官网](https://ollama.com/)）
 - 本地模型（如 qwen3:14b、mistral:7b 等，需提前通过 `ollama pull` 下载）
-- 语音播报依赖：edge-tts、playsound（用于文字转语音和播放）
+- 语音播报依赖：Balcon TTS（已包含在 utils_bin/balcon/ 目录中，用于离线语音播放）
 
 ## 🚀 安装步骤
 
@@ -72,7 +94,7 @@ cd My_agent_project
 ```bash
 pip install -r requirements.txt
 # 或手动安装核心依赖
-pip install requests pyyaml pytz edge-tts playsound
+pip install requests pyyaml pytz
 ```
 
 ## 📖 使用指南
@@ -107,13 +129,69 @@ python main.py --list-tools
 
 ### 4. 语音播报功能
 智能体具有智能语音播报功能：
-- **自动播报**：当回复文本长度≤50字时，自动触发语音播报
+- **自动播报**：当回复文本长度≤200字时，自动触发语音播报
 - **手动调用**：可通过工具调用格式手动触发语音播报
+- **离线播放**：使用Balcon TTS实现离线语音播放，无需网络连接
+- **异步执行**：语音播放在后台执行，不会阻塞用户输入，用户可在语音播放时继续与智能体对话
 
 ```bash
 # 示例：手动触发语音播报
 python main.py --query "请将'你好，欢迎使用本地大模型智能体！'转换为语音"
 ```
+
+### 5. HTTP请求工具使用
+智能体支持发送HTTP请求到指定的API接口：
+
+**调用格式**：
+```
+TOOL_CALL: http_request {
+  "url": "http://localhost:8000/api/Alarm",
+  "method": "GET",
+  "timeout": 10
+}
+```
+
+**示例**：
+- 获取报警信息：`python main.py --query "获取报警信息"`
+- 更新报警值：`python main.py --query "更新报警值为20"`
+
+### 6. 日志分析功能使用
+智能体支持调用`/api/get-log-last-lines`接口查看日志，检测渗透痕迹：
+
+**调用格式**：
+```
+TOOL_CALL: get_log_last_lines {
+  "lines_count": 100
+}
+```
+
+**参数说明**：
+- `lines_count` (可选)：获取的日志行数，默认50行
+
+**示例**：
+- 查看默认50行日志：`python main.py --query "查看系统日志，检查是否有渗透痕迹"`
+- 查看100行日志：`python main.py --query "查看系统日志100行，检查是否有渗透痕迹"`
+
+**日志分析功能**：
+系统会自动分析日志中的渗透痕迹，包括：
+- SQL注入攻击
+- XSS攻击
+- 敏感文件访问
+- 命令注入
+- 路径遍历
+- 异常请求
+
+### 7. API列表管理
+智能体只能使用预定义的API列表，确保安全可控：
+
+**配置文件**：`api_config.json`
+- 存储允许使用的API列表
+- 包含API的URL、方法、描述和参数信息
+
+**使用限制**：
+- 模型只能使用`api_config.json`中定义的API
+- 严格按照配置的参数格式调用API
+- 支持GET和POST等多种HTTP方法
 
 ## ⚙️ 配置说明
 核心配置文件：`config.py`
@@ -193,7 +271,29 @@ __all__ = ['BaseTools', 'MathTools', 'CustomTools']
 ```
 
 ### 步骤4：更新系统提示词
-在 `prompts/system_prompt.yaml` 中补充工具说明，确保模型能识别新工具。
+在 `prompts/system_prompt.yaml` 中添加新工具和API的说明，确保模型能识别并正确使用。
+
+### 步骤5：扩展API列表（可选）
+如果需要限制模型只能使用特定的API，可在 `api_config.json` 中添加：
+```json
+{
+    "allowed_apis": [
+        {
+            "name": "Weather",
+            "url": "https://api.example.com/weather",
+            "method": "GET",
+            "description": "获取天气信息",
+            "params": {
+                "city": {
+                    "type": "string",
+                    "required": true,
+                    "description": "城市名称"
+                }
+            }
+        }
+    ]
+}
+```
 
 ## 📝 常见问题
 ### Q1: 连接 Ollama 失败？
@@ -212,10 +312,10 @@ __all__ = ['BaseTools', 'MathTools', 'CustomTools']
 - 确保本地硬件满足模型运行要求（如足够的内存/显存）
 
 ### Q4: 语音播报不工作？
-- 检查是否安装了语音依赖：`pip install edge-tts playsound`
-- 确认网络连接正常（edge-tts 需要联网）
+- 检查 `utils_bin/balcon/` 目录是否存在，以及 `balcon.exe` 文件是否完整
 - 查看控制台输出，确认语音工具是否成功加载
-- 检查回复文本长度是否≤50字（默认设置）
+- 检查回复文本长度是否≤200字（默认设置）
+- 确认系统已安装语音库，如 Microsoft Xiaoxiao
 
 ## 📄 许可证
 （可选）补充你的开源许可证，如 MIT、Apache 2.0 等。

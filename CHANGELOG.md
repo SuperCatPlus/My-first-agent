@@ -5,7 +5,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.2.0] - 2026-02-01
+
+### Added
+- 🔍 新增日志分析功能：调用/api/get-log-last-lines接口查看日志，检测渗透痕迹
+- 🛡️ 实现了多种渗透攻击模式检测：SQL注入、XSS、敏感文件访问、命令注入、路径遍历、异常请求等
+- 📊 支持自定义日志行数：通过lines_count参数控制返回的日志行数，默认50行
+
+### Changed
+- 🎨 更新了README.md：添加日志分析功能说明和使用方法
+
+### Fixed
+- 🐛 修复了语音播放丢失前几个字的问题：将文本前的单个中文空格增加为三个，确保Balcon完整播放所有内容
+- 🐛 修复了语音播放阻塞用户输入的问题：使用subprocess.Popen()实现后台执行，用户可在语音播放时继续输入
+
+## [1.2.1] - 2026-02-01
+
+### Added
+- 🌐 新增HTTP请求工具：支持发送GET、POST等HTTP请求到指定API接口
+- 📋 新增API列表管理：限制模型只能使用预定义的API列表，确保安全可控
+
+### Changed
+- 🎨 更新了README.md：添加HTTP请求工具和API列表管理的使用说明
+- 🎨 更新了系统提示词：添加HTTP请求工具和API列表的详细说明
+
+### Fixed
+- 🐛 修复了工具调用解析失败的问题：确保能正确解析嵌套的JSON结构
+
+## [1.1.0] - 2026-01-31
+
+### Added
+- ✨ 新增Balcon离线语音播放：替代原来的edge-tts在线合成
+- 🎯 语音播报字数限制调整：从≤50字改为≤200字，支持更长回复的自动播报
+
+### Changed
+- 🔄 语音工具实现：从edge_tts切换到balcon，实现离线语音播放
+- 🎨 更新了README.md：添加balcon相关信息和目录结构
+
+### Fixed
+- 🐛 修复了Balcon路径问题：将路径从balcon/balcon.exe修改为utils_bin/balcon/balcon.exe
+- 🐛 解决了Balcon吞字问题：在文本前添加中文空格，确保完整播放所有内容
 
 ## [1.0.0] - 2026-01-28
 
@@ -34,6 +73,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - 📝 完善了项目文档
 
-[Unreleased]: https://github.com/yourusername/yourproject/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/yourusername/yourproject/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/yourusername/yourproject/releases/tag/v1.2.1
+[1.2.0]: https://github.com/yourusername/yourproject/releases/tag/v1.2.0
+[1.1.0]: https://github.com/yourusername/yourproject/releases/tag/v1.1.0
 [1.0.0]: https://github.com/yourusername/yourproject/releases/tag/v1.0.0
 [0.1.0]: https://github.com/yourusername/yourproject/releases/tag/v0.1.0

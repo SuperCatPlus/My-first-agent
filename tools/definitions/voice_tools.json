@@ -1,35 +1,39 @@
 {
     "tools": [
         {
-            "name": "text_to_speech_edge_mixed",
-            "description": "实现中英混搭文字转语音（生成+自动播放）",
+            "name": "balcon_tts",
+            "description": "调用Balcon实现文本转语音",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "text": {
                         "type": "string",
-                        "description": "待转换的中英混搭文本"
+                        "description": "要合成语音的文本（必填）"
                     },
-                    "audio_path": {
+                    "save_to_file": {
                         "type": "string",
-                        "description": "音频保存路径(支持mp3/wav),默认使用临时文件"
+                        "description": "保存语音文件的路径（如\"output.wav\"，可选，不填则直接播放）"
                     },
-                    "voice": {
+                    "voice_name": {
                         "type": "string",
-                        "description": "语音音色（需支持中英双语），默认: zh-CN-XiaoxiaoNeural"
+                        "description": "语音库名称（可选，不填则用默认语音）"
                     },
-                    "keep_file": {
-                        "type": "boolean",
-                        "description": "是否保留音频文件,默认:False(自动删除)"
-                    },
-                    "max_length": {
+                    "speed": {
                         "type": "integer",
-                        "description": "触发发声的最大文本长度，默认:50（超过此长度不发声）"
+                        "description": "语速（1-200，默认100）"
                     }
                 },
                 "required": [
                     "text"
                 ]
+            }
+        },
+        {
+            "name": "list_balcon_voices",
+            "description": "调用Balcon列出所有可用的语音库（去重+过滤无效行）",
+            "parameters": {
+                "type": "object",
+                "properties": {}
             }
         }
     ]

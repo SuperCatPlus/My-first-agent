@@ -50,12 +50,12 @@ class AgentCore:
         
         # 更强大的解析模式，支持JSON格式参数
         tool_patterns = [
-            # 模式1: TOOL_CALL: tool_name {json}
-            r"TOOL_CALL:\s*(\w+)\s*\{([\s\S]*?)\}",
+            # 模式1: TOOL_CALL: tool_name {json} - 使用贪婪匹配并正确处理嵌套大括号
+            r"TOOL_CALL:\s*(\w+)\s*\{((?:[^{}]|\{[^{}]*\})*)\}",
             # 模式2: 工具调用: tool_name(json)
             r"工具调用:\s*(\w+)\s*\(([^)]+)\)",
-            # 模式3: 使用tool_name工具 {json}
-            r"使用(\w+)工具\s*\{([\s\S]*?)\}"
+            # 模式3: 使用tool_name工具 {json} - 使用贪婪匹配并正确处理嵌套大括号
+            r"使用(\w+)工具\s*\{((?:[^{}]|\{[^{}]*\})*)\}"
         ]
         
         for pattern in tool_patterns:
@@ -67,28 +67,21 @@ class AgentCore:
                 try:
                     # 首先尝试解析为JSON
                     if params_str:
-                        params = json.loads(params_str)
+                        # 修复JSON解析：处理可能的格式问题
+                        # 确保params_str是一个完整的JSON对象
+                        # 1. 添加外层大括号
+                        json_str = f"{{{params_str}}}"
+                        # 2. 移除可能的尾随逗号
+                        json_str = re.sub(r',\s*([}\]])', r' \1', json_str)
+                        params = json.loads(json_str)
                     else:
                         params = {}
                     return {"name": tool_name, "parameters": params}
-                except json.JSONDecodeError:
-                    # 如果JSON解析失败，尝试解析简单键值对
-                    params = {}
-                    lines = params_str.split('\n')
-                    for line in lines:
-                        line = line.strip()
-                        if ':' in line:
-                            key, value = line.split(':', 1)
-                            key = key.strip().strip('"\'')
-                            value = value.strip().strip('",\'')
-                            if value.lower() in ['true', 'false']:
-                                params[key] = value.lower() == 'true'
-                            elif value.isdigit():
-                                params[key] = int(value)
-                            else:
-                                params[key] = value
-                    
-                    return {"name": tool_name, "parameters": params}
+                except json.JSONDecodeError as e:
+                    print(f"JSON解析错误: {e}")
+                    print(f"原始参数字符串: {params_str}")
+                    # 如果JSON解析失败，返回空参数
+                    return {"name": tool_name, "parameters": {}}
         
         return None
     
@@ -133,17 +126,15 @@ class AgentCore:
                 self.conversation_history.append({"role": "user", "content": user_message})
                 self.conversation_history.append({"role": "assistant", "content": final_message})
                 
-                # 自动语音播报：回复长度<=50字时发声，或用户输入包含"耄耋"时强制发声（工具调用后的回复）
-                should_speak = len(final_message) <= 50 or "耄耋" in user_message
+                # 自动语音播报：回复长度<=200字时发声，或用户输入包含"耄耋"时强制发声（工具调用后的回复）
+                should_speak = len(final_message) <= 200 or "耄耋" in user_message
                 if should_speak:
                     try:
                         # 自动调用语音工具朗读回复
-                        # 当用户输入包含"耄耋"时，设置max_length为较大值以强制发声
-                        max_length = 1000 if "耄耋" in user_message else 50
                         self.tool_registry.execute_tool(
-                            "text_to_speech_edge_mixed",
+                            "balcon_tts",
                             text=final_message,
-                            max_length=max_length
+                            voice_name="Microsoft Xiaoxiao"
                         )
                     except Exception as e:
                         # 语音播报失败不影响回复
@@ -159,17 +150,15 @@ class AgentCore:
             self.conversation_history.append({"role": "user", "content": user_message})
             self.conversation_history.append({"role": "assistant", "content": assistant_message})
             
-            # 自动语音播报：回复长度<=50字时发声，或用户输入包含"耄耋"时强制发声
-            should_speak = len(assistant_message) <= 50 or "耄耋" in user_message
+            # 自动语音播报：回复长度<=200字时发声，或用户输入包含"耄耋"时强制发声
+            should_speak = len(assistant_message) <= 200 or "耄耋" in user_message
             if should_speak:
                 try:
                     # 自动调用语音工具朗读回复
-                    # 当用户输入包含"耄耋"时，设置max_length为较大值以强制发声
-                    max_length = 1000 if "耄耋" in user_message else 50
                     self.tool_registry.execute_tool(
-                        "text_to_speech_edge_mixed",
+                        "balcon_tts",
                         text=assistant_message,
-                        max_length=max_length
+                        voice_name="Microsoft Xiaoxiao"
                     )
                 except Exception as e:
                     # 语音播报失败不影响回复

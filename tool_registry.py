@@ -4,6 +4,11 @@ import importlib.util
 from pathlib import Path
 from typing import Dict, List, Any, Callable
 import sys
+import time
+import random
+
+from colorama import init as colorama_init, Fore, Style
+colorama_init(autoreset=True) # 字体
 
 class ToolRegistry:
     """工具注册表，负责加载工具定义和实现"""
@@ -31,8 +36,11 @@ class ToolRegistry:
                         if tool_name:
                             self.tools[tool_name] = tool_def
                             print(f"已加载工具定义: {tool_name}")
+                            
+                
             except Exception as e:
                 print(f"加载工具定义文件失败 {json_file}: {e}")
+        print(f"====--====")
 
     # def load_tool_implementations(self) -> None:
     #     """加载所有工具实现"""
@@ -116,7 +124,9 @@ class ToolRegistry:
                                         method = getattr(obj, method_name)
                                         if callable(method):
                                             self.implementations[method_name] = method
-                                            print(f"已加载工具实现: {method_name}")
+                                            
+                                            print(Fore.CYAN + f"已加载工具实现: {method_name}")
+                                            # time.sleep(random.uniform(0.2, 1))
                                             
                     except Exception as e:
                         print(f"加载工具模块失败 {module_name}: {e}")
@@ -176,6 +186,6 @@ class ToolRegistry:
         """加载所有工具"""
         self.load_tool_definitions()
         self.load_tool_implementations()
-        
+
         print(f"共加载 {len(self.tools)} 个工具定义")
-        print(f"共加载 {len(self.implementations)} 个工具实现")
+        print(Fore.YELLOW + f"共加载 {len(self.implementations)} 个工具实现")

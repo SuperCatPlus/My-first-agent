@@ -125,3 +125,126 @@
 2026-01-28 13:58:34 - voice_tools - async_task - INFO: 音频文件保存成功：C:\Users\SuperCat\AppData\Local\Temp\tmpsknzej2u.mp3
 2026-01-28 13:58:45 - voice_tools - text_to_speech_edge_mixed - INFO: 临时文件已清理：C:\Users\SuperCat\AppData\Local\Temp\tmpsknzej2u.mp3
 2026-01-28 13:58:45 - log_decorator - wrapper - INFO: 工具函数 text_to_speech_edge_mixed 调用成功 | 出参: {'success': True, 'message': '音频生成并播放完成！', 'audio_path': '临时文件已删除', 'voice': 'zh-CN-XiaoxiaoNeural', 'text_length': 53, 'keep_file': False, 'max_length': 1000}
+2026-01-31 11:56:38 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮助你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 11:56:38 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: False
+2026-01-31 12:00:27 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:00:30 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:00:43 - log_decorator - wrapper - INFO: 工具函数 get_current_time 开始调用 | 入参: args=(), kwargs={'format': '%m月%d日'}
+2026-01-31 12:00:43 - log_decorator - wrapper - INFO: 工具函数 get_current_time 调用成功 | 出参: {'current_time': '01月31日', 'timestamp': '2026-01-31T12:00:43.902507', 'timezone': 'local', 'year': 2026, 'month': 1, 'day': 31, 'hour': 12, 'minute': 0, 'second': 43, 'weekday': 'Saturday', 'success': True}
+2026-01-31 12:00:44 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '今天是01月31日。', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:00:47 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:03:18 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮助你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:03:21 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:13:32 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:13:39 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:14:17 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！今天有什么我可以协助你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:14:23 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:14:28 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！今天有什么我可以协助你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:14:34 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:15:55 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮助你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:15:58 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:16:18 - log_decorator - wrapper - INFO: 工具函数 get_current_time 开始调用 | 入参: args=(), kwargs={'format': '%Y年%m月%d日'}
+2026-01-31 12:16:18 - log_decorator - wrapper - INFO: 工具函数 get_current_time 调用成功 | 出参: {'current_time': '2026年01月31日', 'timestamp': '2026-01-31T12:16:18.033513', 'timezone': 'local', 'year': 2026, 'month': 1, 'day': 31, 'hour': 12, 'minute': 16, 'second': 18, 'weekday': 'Saturday', 'success': True}
+2026-01-31 12:16:19 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '今天是2026年1月31日。', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:16:23 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:20:06 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '黄练友'}
+2026-01-31 12:20:06 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '中午好，黄练友！', 'timestamp': '2026-01-31T12:20:06.819422'}
+2026-01-31 12:23:26 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '您提到的“黄练友”似乎并非标准犬种名称，可能为昵称或虚构名称。根据您的描述，若该犬属于大型犬且性格暴躁，可能与罗威纳犬、比特犬等品种有相似特征。不过需要说明的是，犬类学中通常将犬归为“犬科”（Canidae），而“犬科动物”是更广泛的分类，包含狼、狐狸等。若您想了解特定犬种的特性或行为问题，可以提供更多细节，我会尽力帮助！', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:23:56 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:24:32 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '目前没有关于名为“黄练友”的标准犬种或已知动物的权威信息。根据您之前的描述，这可能是一个虚构名称、昵称或特定语境下的代称。如果您有更多背景信息或具体问题，欢迎补充，我会尽力协助！', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:24:49 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:25:04 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '黄练友是您自定义的昵称，属于您对某条狗的戏称。根据您描述的特征（大型犬、脾气暴躁），它可能符合罗威纳犬、比特犬等品种的部分特性，但具体品种需结合实际体型、毛色等特征判断。若需要训练建议或养犬知识，可以继续问我哦！', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:25:24 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:25:48 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '好的，请您具体说明需要总结哪些知识内容，或提出具体问题，我会根据对话历史和已有信息为您整理归纳。', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:25:57 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:26:26 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '根据之前的对话，"黄练友"是您自定义的昵称，属于您对某条狗的戏称。这个名称并没有特定的含义或指向，可能是您对某只宠物的个性化称呼，或者是某个特定语境下的虚构角色。如果您有更多背景信息或具体问题，欢迎补充，我会尽力协助！', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:26:48 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:29:10 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '根据我们的对话规范，我不能协助创建或讨论涉及色情、低俗等不当内容的角色设定。如果您有其他关于宠物饲养、角色设定或需要工具帮助的问题，欢迎继续交流！', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:29:24 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:29:36 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '根据我们的对话规范，我不能协助创建或讨论涉及暴力、低俗等不当内容的角色设定。如果您有其他关于宠物饲养、角色设定或需要工具帮助的问题，欢迎继续交流！', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:29:50 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:31:15 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '“无声龙”这个名字很有意境呢！“无声”给人一种安静、沉稳的感觉，而“龙”则增添了威严与祥瑞的意味，组合起来既独特又富有文化底蕴。听起来既有故事感，又适合流浪狗身上那种低调而坚韧的气质～您给狗狗取名时有没有特别的灵感呀？(◍•ᴗ•◍)', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:31:35 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:31:59 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '记得的呀！"无声龙"是您给一条流浪狗取的名字，这个名字既有故事感又独特，听起来很有意境呢～您是觉得狗狗有什么特别的特质，才想到这个名字的吗？(◍•ᴗ•◍)', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:35:50 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '“无声龙”是一个很有创意的名字！名字中的“无声”给人一种神秘感，而“龙”则增添了威严与力量感，整体听起来既独特又富有意境。不过，考虑到狗狗的听觉特点，名字的发音是否清晰易叫也很重要哦～如果狗狗对“龙”字有特别的反应（比如听到后表现出兴奋），那这个名字会非常贴切！ 🐾', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:36:14 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-01-31 12:36:45 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '"无声龙"是您为流浪狗取的创意名字，由两个部分组成：\n1. "无声"：可能寓意狗狗安静温顺的性格，或名字发音的平和感\n2. "龙"：象征着威严与力量，也暗含"小龙"的可爱感\n\n这个名字既有诗意又充满想象力，就像给狗狗披上了神秘的外衣~ 您觉得这个名字和狗狗的性格/外貌有什么特别的关联吗？ 🐾', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-01-31 12:37:14 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 11:55:23 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮助你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 11:55:27 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 11:55:43 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '好的，我在这里倾听。请告诉我你想分享的事情或需要帮助的内容！', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 11:55:48 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 11:57:21 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '真有趣！给狗狗起名字很有创意呢～黄炼勇这个名字既符合它毛色特征，又有勇往直前的美好寓意，看来是条有福气的狗狗呀！需要帮忙设计狗狗的日常护理指南，或者寻找主人的建议吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 11:57:36 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 19:20:22 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '您似乎想测试或与本地的 `/api/Alarm` 接口交互。请问您需要执行什么具体操作？例如：\n1. 获取该接口的文档说明\n2. 发送特定类型的请求（如GET/POST）\n3. 测试接口功能\n4. 其他需求\n\n请补充说明您的具体需求，我将协助您完成操作。', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 19:20:42 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 19:21:23 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: http_request {\n  "url": "http://localhost:8000/api/Alarm"\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 19:21:34 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 19:27:42 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '用户'}
+2026-02-01 19:27:42 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '晚上好，用户！', 'timestamp': '2026-02-01T19:27:42.688909'}
+2026-02-01 19:27:43 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: greet_user {\n  "name": "用户"\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 19:27:50 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 19:28:19 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '请问您的姓名是？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 19:28:21 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 19:28:53 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '用户'}
+2026-02-01 19:28:53 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '晚上好，用户！', 'timestamp': '2026-02-01T19:28:53.312194'}
+2026-02-01 19:28:54 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '晚上好，用户！有什么我可以帮助您的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 19:28:57 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 19:29:31 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你叫什么？这个问题似乎有些混淆。你是想问我的名字吗？如果是的话，我叫通义千问。或者，你是想确认自己的名字？如果是这样，请告诉我你的名字，我会用greet_user工具向你问好。', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 19:29:44 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 19:37:11 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '当前报警值为：10\n\n需要对报警值进行处理吗？比如查看历史记录、设置阈值提醒等。', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 19:37:18 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 19:41:50 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: http_request {\n  "url": "http://localhost:8000/api/AlarmU",\n  "method": "POST",\n  "data": {\n    "V": 20\n  }\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 19:42:08 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:13:55 - log_decorator - wrapper - INFO: 工具函数 get_current_time 开始调用 | 入参: args=(), kwargs={'timezone': 'Asia/Shanghai', 'format': '%Y年%m月%d日 %H:%M:%S'}
+2026-02-01 20:13:56 - log_decorator - wrapper - INFO: 工具函数 get_current_time 调用成功 | 出参: {'current_time': '2026年02月02日 04:13:55', 'timestamp': '2026-02-02T04:13:55.219068+08:00', 'timezone': 'Asia/Shanghai', 'year': 2026, 'month': 2, 'day': 2, 'hour': 4, 'minute': 13, 'second': 55, 'weekday': 'Monday', 'success': True}
+2026-02-01 20:13:58 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '现在是2026年02月02日 04:13:55，您需要我帮您做什么呢？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:13:58 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:14:05 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '请告诉我你的名字，这样我可以更好地为你服务。', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:14:05 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:14:48 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'A B C D E F G H I J K L M N O P Q R S T U V W X'}
+2026-02-01 20:14:48 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:14:52 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: balcon_tts {\n  "text": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:14:52 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:14:56 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么我可以帮助你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:14:56 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:15:14 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么我可以帮助你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:15:14 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:15:31 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'A B C D E F G H I J K L M N O P Q R S T U V W X'}
+2026-02-01 20:15:31 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:15:34 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: balcon_tts {\n  "text": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:15:34 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:15:37 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:15:37 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:16:14 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'}
+2026-02-01 20:16:14 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:16:19 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: balcon_tts {\n  "text": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:16:19 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:17:19 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'}
+2026-02-01 20:17:19 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:17:22 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: balcon_tts {\n  "text": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:17:22 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:30:38 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'}
+2026-02-01 20:30:38 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:30:42 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: balcon_tts {\n  "text": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:30:42 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:31:03 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '用户'}
+2026-02-01 20:31:03 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '晚上好，用户！', 'timestamp': '2026-02-01T20:31:03.919045'}
+2026-02-01 20:31:05 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: greet_user {\n  "name": "用户"\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:31:05 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:31:43 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！很高兴见到你，有什么可以帮你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:31:43 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:33:23 - log_decorator - wrapper - INFO: 工具函数 get_current_time 开始调用 | 入参: args=(), kwargs={'format': '%m月%d日'}
+2026-02-01 20:33:23 - log_decorator - wrapper - INFO: 工具函数 get_current_time 调用成功 | 出参: {'current_time': '02月01日', 'timestamp': '2026-02-01T20:33:23.573841', 'timezone': 'local', 'year': 2026, 'month': 2, 'day': 1, 'hour': 20, 'minute': 33, 'second': 23, 'weekday': 'Sunday', 'success': True}
+2026-02-01 20:33:25 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '今天是02月01日。', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:33:25 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:35:30 - log_decorator - wrapper - INFO: 工具函数 greet_user 开始调用 | 入参: args=(), kwargs={'name': '用户'}
+2026-02-01 20:35:30 - log_decorator - wrapper - INFO: 工具函数 greet_user 调用成功 | 出参: {'greeting': '晚上好，用户！', 'timestamp': '2026-02-01T20:35:30.515699'}
+2026-02-01 20:35:32 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': 'TOOL_CALL: greet_user {\n  "name": "用户"\n}', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:35:32 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:35:46 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '你好！有什么可以帮助你的吗？', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:35:46 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True
+2026-02-01 20:36:09 - log_decorator - wrapper - INFO: 工具函数 calculate 开始调用 | 入参: args=(), kwargs={'expression': '1+1'}
+2026-02-01 20:36:09 - log_decorator - wrapper - INFO: 工具函数 calculate 调用成功 | 出参: {'expression': '1+1', 'result': 2, 'type': 'int', 'success': True}
+2026-02-01 20:36:09 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 开始调用 | 入参: args=(), kwargs={'text': '1+1等于2。', 'voice_name': 'Microsoft Xiaoxiao'}
+2026-02-01 20:36:09 - log_decorator - wrapper - INFO: 工具函数 balcon_tts 调用成功 | 出参: True

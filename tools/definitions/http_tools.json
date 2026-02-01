@@ -1,0 +1,40 @@
+{
+    "tools": [
+        {
+            "name": "http_request",
+            "description": "发送HTTP请求到指定的API接口",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "请求的URL地址，例如：http://localhost:8000/api/Alarm"
+                    },
+                    "method": {
+                        "type": "string",
+                        "description": "HTTP请求方法，例如：GET、POST、PUT、DELETE",
+                        "default": "GET"
+                    },
+                    "headers": {
+                        "type": "object",
+                        "description": "请求头信息，例如：{\"Content-Type\": \"application/json\"}"
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "请求体数据，仅在POST、PUT等方法中使用"
+                    },
+                    "params": {
+                        "type": "object",
+                        "description": "URL查询参数"
+                    },
+                    "timeout": {
+                        "type": "number",
+                        "description": "请求超时时间（秒）",
+                        "default": 30
+                    }
+                },
+                "required": ["url"]
+            }
+        }
+    ]
+}

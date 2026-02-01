@@ -9,9 +9,13 @@ from config import config
 from tool_registry import ToolRegistry
 from agent_core import AgentCore
 
+# import base_init
+from colorama import init as colorama_init, Fore, Style
+colorama_init(autoreset=True)   #字体
+
 def initialize_agent(check_ollama=True) -> AgentCore:
     """初始化智能体"""
-    print("正在初始化智能体...")
+    print(Fore.BLUE + "正在初始化智能体...")
     
     # 检查依赖
     try:
@@ -60,7 +64,7 @@ def initialize_agent(check_ollama=True) -> AgentCore:
 def interactive_mode(agent: AgentCore):
     """交互模式"""
     print("\n" + "="*50)
-    print("智能体已就绪！")
+    print(Fore.GREEN + "智能体已就绪！")
     print(f"模型: {config.MODEL_NAME}")
     print("输入 '退出' 或 'quit' 结束对话")
     print("输入 '清除' 或 'clear' 清除对话历史")
