@@ -11,7 +11,7 @@ class VoiceTools:
     
     @staticmethod
     @log_tool_call
-    def balcon_tts(text, save_to_file=None, voice_name=None, speed=100): 
+    def balcon_tts(text, save_to_file=None, voice_name=None, speed=90): 
         """ 
         调用Balcon实现文本转语音 
         :param text: 要合成语音的文本（必填） 
@@ -35,8 +35,9 @@ class VoiceTools:
             # 过滤掉emoji表情和其他特殊字符
             import re
             # 使用更全面的正则表达式过滤掉emoji和其他可能导致问题的字符
-            # 过滤掉所有非ASCII和非中文字符
-            filtered_text = re.sub('[^\x00-\x7F\u4E00-\u9FFF]', '', filtered_text)
+            # 保留ASCII字符、中文字符和中文标点符号
+            # 中文标点符号范围：\u3000-\u303F（全角标点）、\uFF00-\uFFEF（半角标点）
+            filtered_text = re.sub('[^\x00-\x7F\u4E00-\u9FFF\u3000-\u303F\uFF00-\uFFEF]', '', filtered_text)
             # 解决Balcon可能吞掉前几个字的问题：
             # 1. 在文本前添加多个中文空格，确保Balcon正确处理文本的开头部分
             # 2. 中文空格在语音播放时不会被明显察觉

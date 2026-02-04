@@ -2,27 +2,28 @@
     "allowed_apis": [
         {
             "name": "Alarm",
-            "url": "http://localhost:8000/api/Alarm",
+            "url": "{backend_api_base}/api/Alarm",
             "method": "GET",
             "description": "获取报警信息",
             "params": {}
         },
         {
             "name": "AlarmU",
-            "url": "http://localhost:8000/api/AlarmU",
+            "url": "{backend_api_base}/api/AlarmU",
             "method": "POST",
             "description": "更新报警信息",
             "params": {
                 "V": {
                     "type": "int",
                     "required": true,
-                    "description": "报警值"
+                    "description": "报警值",
+                    "in": "query"
                 }
             }
         },
         {
             "name": "LogLastLines",
-            "url": "http://localhost:8000/api/get-log-last-lines",
+            "url": "{backend_api_base}/api/get-log-last-lines",
             "method": "GET",
             "description": "获取日志最后几行，用于查看渗透痕迹",
             "params": {

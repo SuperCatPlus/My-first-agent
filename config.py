@@ -19,7 +19,7 @@ class Config:
 
     # Ollama API配置
     OLLAMA_API_BASE = "http://localhost:11434/api"
-    MODEL_NAME = "qwen3:8b"  # 可根据实际情况修改为qwen、mistral等
+    MODEL_NAME = "qwen3:8b"  
     
     # 工具配置
     TOOLS_DEFINITIONS_DIR = "tools/definitions"
@@ -27,6 +27,9 @@ class Config:
     
     # 系统提示词文件
     SYSTEM_PROMPT_FILE = "prompts/system_prompt.yaml"
+    
+    # 后端API配置
+    BACKEND_API_BASE = "http://127.0.0.1:8002"
     
     # 模型参数
     MODEL_PARAMS = {

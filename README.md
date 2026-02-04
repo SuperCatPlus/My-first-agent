@@ -86,8 +86,8 @@ ollama pull qwen3:14b
 
 ### 4. 克隆/下载项目代码
 ```bash
-git clone <你的仓库地址>
-cd My_agent_project
+git clone https://github.com/SuperCatPlus/My-first-agent.git
+cd My-first-agent
 ```
 
 ### 5. 安装 Python 依赖

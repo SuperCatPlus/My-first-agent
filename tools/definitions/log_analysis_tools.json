@@ -1,0 +1,32 @@
+{
+    "tools": [
+        {
+            "name": "analyze_geoserver_log",
+            "description": "分析GeoServer日志文件，识别潜在威胁和异常内容",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "log_file_path": {
+                        "type": "string",
+                        "description": "日志文件路径，默认使用geoserver.log.1"
+                    }
+                },
+                "required": []
+            }
+        },
+        {
+            "name": "analyze_geoserver_log_summarize",
+            "description": "分析GeoServer日志文件，返回威胁摘要，适合快速查看",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "log_file_path": {
+                        "type": "string",
+                        "description": "日志文件路径，默认使用geoserver.log.1"
+                    }
+                },
+                "required": []
+            }
+        }
+    ]
+}

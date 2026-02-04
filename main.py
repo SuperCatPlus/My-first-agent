@@ -9,7 +9,7 @@ from config import config
 from tool_registry import ToolRegistry
 from agent_core import AgentCore
 
-# import base_init
+import base_init
 from colorama import init as colorama_init, Fore, Style
 colorama_init(autoreset=True)   #字体
 
@@ -114,9 +114,9 @@ def main():
     parser.add_argument("--query", "-q", help="单次查询模式，直接输入问题")
     parser.add_argument("--model", "-m", help="指定模型名称，覆盖配置文件")
     parser.add_argument("--list-tools", "-l", action="store_true", 
-                       help="列出可用工具")
+                        help="列出可用工具")
     parser.add_argument("--test-tools", "-t", action="store_true", 
-                       help="测试工具加载（不连接Ollama服务）")
+                        help="测试工具加载（不连接Ollama服务）")
     
     args = parser.parse_args()
     

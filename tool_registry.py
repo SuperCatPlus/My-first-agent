@@ -126,7 +126,7 @@ class ToolRegistry:
                                             self.implementations[method_name] = method
                                             
                                             print(Fore.CYAN + f"已加载工具实现: {method_name}")
-                                            # time.sleep(random.uniform(0.2, 1))
+                                            time.sleep(random.uniform(0.2, 1))
                                             
                     except Exception as e:
                         print(f"加载工具模块失败 {module_name}: {e}")

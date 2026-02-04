@@ -1,10 +1,13 @@
 import requests
 import json
+from config import config
+from .log_decorator import log_tool_call
 
 class HttpTools:
     """HTTP请求工具类"""
     
     @staticmethod
+    @log_tool_call
     def http_request(url, method="GET", headers=None, data=None, params=None, timeout=30):
         """
         发送HTTP请求到指定的API接口
@@ -88,6 +91,7 @@ class HttpTools:
             }
     
     @staticmethod
+    @log_tool_call
     def get_log_last_lines(lines_count=None):
         """
         调用/api/get-log-last-lines接口获取日志最后几行，用于查看是否有渗透痕迹
@@ -98,7 +102,7 @@ class HttpTools:
         返回:
             dict: 请求结果，包含状态码、响应内容等信息
         """
-        base_url = "http://localhost:8000/api/get-log-last-lines"
+        base_url = f"{config.BACKEND_API_BASE}/api/get-log-last-lines"
         params = {}
         
         if lines_count is not None:
@@ -107,6 +111,7 @@ class HttpTools:
         return HttpTools.http_request(base_url, method="GET", params=params)
     
     @staticmethod
+    @log_tool_call
     def analyze_log_for_intrusion(log_data):
         """
         分析日志数据，寻找渗透痕迹

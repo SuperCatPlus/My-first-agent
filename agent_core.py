@@ -18,7 +18,10 @@ class AgentCore:
         try:
             with open(self.config.SYSTEM_PROMPT_FILE, 'r', encoding='utf-8') as f:
                 data = yaml.safe_load(f)
-                return data.get('system_prompt', '')
+                system_prompt = data.get('system_prompt', '')
+                # 替换后端API基础URL占位符
+                system_prompt = system_prompt.replace('{backend_api_base}', self.config.BACKEND_API_BASE)
+                return system_prompt
         except Exception as e:
             print(f"加载系统提示词失败: {e}")
             return "你是一个有用的助手。"
@@ -151,18 +154,20 @@ class AgentCore:
             self.conversation_history.append({"role": "assistant", "content": assistant_message})
             
             # 自动语音播报：回复长度<=200字时发声，或用户输入包含"耄耋"时强制发声
-            should_speak = len(assistant_message) <= 200 or "耄耋" in user_message
-            if should_speak:
-                try:
-                    # 自动调用语音工具朗读回复
-                    self.tool_registry.execute_tool(
-                        "balcon_tts",
-                        text=assistant_message,
-                        voice_name="Microsoft Xiaoxiao"
-                    )
-                except Exception as e:
-                    # 语音播报失败不影响回复
-                    print(f"自动语音播报失败: {e}")
+            # 但不播报工具调用格式
+            if not self._extract_tool_call(assistant_message):
+                should_speak = len(assistant_message) <= 200 or "耄耋" in user_message
+                if should_speak:
+                    try:
+                        # 自动调用语音工具朗读回复
+                        self.tool_registry.execute_tool(
+                            "balcon_tts",
+                            text=assistant_message,
+                            voice_name="Microsoft Xiaoxiao"
+                        )
+                    except Exception as e:
+                        # 语音播报失败不影响回复
+                        print(f"自动语音播报失败: {e}")
             
             return assistant_message
     

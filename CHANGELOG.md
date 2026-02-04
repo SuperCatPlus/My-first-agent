@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+
+
+## [1.2.2] - 2026-02-04
+
+### Added
+- 🔍 新增GeoServer日志分析工具：集成本地日志过滤功能，支持分析10万行日志文件
+- 🛡️ 实现多维度安全威胁检测：Java RCE、Shell命令注入、路径遍历等多种攻击模式
+- 📊 提供两种分析模式：完整分析（详细威胁信息）和快速摘要（威胁概览）
+- 🎯 支持IP过滤：可配置过滤特定IP或IP段，减少误报
+- 🚀 优化日志解析性能：支持大文件快速处理和结构化分析
+
+### Changed
+- 🎨 更新系统提示词：添加日志分析工具的使用说明和示例
+- 🎨 更新了README.md：添加日志分析功能的详细说明
+
+### Fixed
+- 🐛 修复了日志解析中的时间格式问题：适配中文月份格式
+- 🐛 解决了日志聚合中的响应时间匹配问题：确保完整记录请求耗时
+
+## [1.2.1] - 2026-02-03
+
+### Added
+- 🚀 新增后端 API 地址集中配置：在 config.py 中添加 BACKEND_API_BASE 配置项，统一管理后端服务地址
+- 🎯 实现 API 地址动态替换：系统提示词和配置文件中的 API 地址使用占位符，运行时自动替换为实际配置
+
+### Changed
+- 🔄 更新系统提示词：将硬编码的 API 地址替换为 {backend_api_base} 占位符
+- 🔄 更新 API 配置文件：将硬编码的 API 地址替换为 {backend_api_base} 占位符
+- 🔄 更新 HTTP 工具：get_log_last_lines 方法使用配置的 BACKEND_API_BASE
+
+### Fixed
+- 🐛 修复了语音播放标点符号丢失的问题：修改正则表达式，保留中文标点符号，使语音播放更有顿挫感
+- 🐛 修复了修改预警值时无法更新的问题：将 API 调用中的 V 参数从请求体 (data) 改为查询参数 (params)，以匹配后端 API 的预期格式
+
 ## [1.2.0] - 2026-02-01
 
 ### Added
@@ -73,7 +108,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - 📝 完善了项目文档
 
-[Unreleased]: https://github.com/yourusername/yourproject/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/yourusername/yourproject/compare/v1.2.2...HEAD
+[1.2.2]: https://github.com/SuperCatPlus/My-first-agent
 [1.2.1]: https://github.com/yourusername/yourproject/releases/tag/v1.2.1
 [1.2.0]: https://github.com/yourusername/yourproject/releases/tag/v1.2.0
 [1.1.0]: https://github.com/yourusername/yourproject/releases/tag/v1.1.0
