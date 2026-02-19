@@ -23,20 +23,19 @@ class BaseTools:
             包含时间信息的字典
         """
         try:
-            now = datetime.datetime.now()
-            
-            # 应用时区
+            # 获取当前时间
             if timezone:
                 try:
                     target_tz = pytz.timezone(timezone)
-                    now_utc = pytz.utc.localize(now)  # 将当前时间视为UTC
-                    now = now_utc.astimezone(target_tz)
+                    now = datetime.datetime.now(target_tz)
                 except Exception as tz_error:
                     return {
                         "error": f"时区错误: {str(tz_error)}",
-                        "current_time_utc": now.strftime("%Y-%m-%d %H:%M:%S"),
+                        "current_time_utc": datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
                         "timezone": "UTC"
                     }
+            else:
+                now = datetime.datetime.now()
             
             # 应用格式
             if format:

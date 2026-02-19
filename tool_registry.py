@@ -42,54 +42,6 @@ class ToolRegistry:
                 print(f"加载工具定义文件失败 {json_file}: {e}")
         print(f"====--====")
 
-    # def load_tool_implementations(self) -> None:
-    #     """加载所有工具实现"""
-    #     implementations_dir = Path(self.config.TOOLS_IMPLEMENTATIONS_DIR)
-        
-    #     if not implementations_dir.exists():
-    #         raise FileNotFoundError(f"工具实现目录不存在: {implementations_dir}")
-        
-    #     # 添加工具实现目录到Python路径
-    #     sys.path.insert(0, str(implementations_dir.parent))
-        
-    #     try:
-    #         # 动态导入工具实现模块
-    #         for py_file in implementations_dir.glob("*.py"):
-    #             if py_file.name == "__init__.py":
-    #                 continue
-                    
-    #             module_name = py_file.stem
-    #             try:
-    #                 # 导入模块
-    #                 spec = importlib.util.spec_from_file_location(
-    #                     module_name, 
-    #                     py_file
-    #                 )
-    #                 module = importlib.util.module_from_spec(spec)
-    #                 spec.loader.exec_module(module)
-                    
-    #                 # 查找并注册工具类
-    #                 for attr_name in dir(module):
-    #                     attr = getattr(module, attr_name)
-    #                     if isinstance(attr, type) and hasattr(attr, '__module__'):
-    #                         # 获取工具类的所有静态方法
-    #                         for method_name in dir(attr):
-    #                             method = getattr(attr, method_name)
-    #                             if (callable(method) and 
-    #                                 not method_name.startswith('_') and
-    #                                 method_name in self.tools):
-                                    
-    #                                 self.implementations[method_name] = method
-    #                                 print(f"已加载工具实现: {method_name}")
-                                    
-    #             except Exception as e:
-    #                 print(f"❌️加载工具实现模块失败 {module_name}: {e}")
-                    
-    #     finally:
-    #         # 恢复Python路径
-    #         if str(implementations_dir.parent) in sys.path:
-    #             sys.path.remove(str(implementations_dir.parent))
-    
     def load_tool_implementations(self) -> None:
         """加载所有工具实现"""
         import sys
@@ -126,7 +78,7 @@ class ToolRegistry:
                                             self.implementations[method_name] = method
                                             
                                             print(Fore.CYAN + f"已加载工具实现: {method_name}")
-                                            time.sleep(random.uniform(0.2, 1))
+                                            # time.sleep(random.uniform(0.2, 1))
                                             
                     except Exception as e:
                         print(f"加载工具模块失败 {module_name}: {e}")

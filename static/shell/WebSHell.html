@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shell</title>
+    <!-- 引入xterm.js核心库和样式 下面三个注释不要删！！！-->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css"> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.min.js"></script> -->
+    <link rel="stylesheet" href="css/xterm.min.css">
+    <link rel="stylesheet" href="css/WebSHell.css">
+    <script src="lib/xterm.min.js"></script>
+    <!-- xterm.js适配插件（可选） -->
+    <script src="lib/xterm-addon-fit.min.js"></script>
+    
+    <script src="/common/base.js">//src = "static\common\base.js"</script>
+</head>
+<body>
+    <!-- 登录框 -->
+    <div class="login-container" id="login-container">
+        <form id="loginForm" onsubmit="event.preventDefault(); connectSSH();">
+            <div class="form-group">
+                <label for="address">名称</label>
+                <input type="text" id="address" placeholder="请输入名称" value="新的终端" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="host">主机IP</label>
+                <input type="text" id="host" placeholder="请输入主机IP" value="172.16.37.208" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="port">SSH端口</label>
+                <input type="text" id="port" placeholder="请输入端口号" value="22" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" placeholder="请输入用户名" value="eternity" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" placeholder="请输入密码" autocomplete="current-password">
+            </div>
+            <button type="submit" class="login-button" id="connectBtn">连接SSH</button>
+        </form>
+    </div>
+    
+    <!-- 终端容器 -->
+    <div class="terminal-wrapper" id="terminal-wrapper">
+        <div id="terminal-container"></div>
+    </div>
+
+    <script>
+        // 全局变量
+        let terminal = null;
+        let fitAddon = null;
+        let ws = null;
+        
+        /**
+         * 验证表单字段是否全部填写
+         * @returns {boolean} - 所有字段是否都已填写
+         */
+        function  validateForm() {
+            const address = document.getElementById('address').value.trim();
+            const host = document.getElementById('host').value.trim();
+            const port = document.getElementById('port').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            return address && host && port && username && password;
+        }
+        
+        /**
+         * 更新连接按钮状态
+         * 根据表单验证结果启用或禁用按钮
+         */
+        function  updateButtonState() {
+            const connectBtn = document.getElementById('connectBtn');
+            const isValid = validateForm();
+            
+            if (isValid) {
+                connectBtn.disabled = false;
+                connectBtn.style.opacity = '1';
+                connectBtn.style.cursor = 'pointer';
+            } else {
+                connectBtn.disabled = true;
+                connectBtn.style.opacity = '0.5';
+                connectBtn.style.cursor = 'not-allowed';
+            }
+        }
+
+        /**
+         * 页面加载完成后初始化
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            // 为所有输入框添加事件监听器
+            const inputs = ['address', 'host', 'port', 'username', 'password'];
+            inputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener('input', updateButtonState);
+                    input.addEventListener('change', updateButtonState);
+                }
+            });
+            
+            // 初始化按钮状态
+            updateButtonState();
+        });
+
+        /**
+         * 连接SSH函数
+         * 处理登录表单提交逻辑，先连接后显示终端
+         */
+        function  connectSSH() {
+            console.log('=== connectSSH 函数被调用 ===');
+            // 获取表单数据
+            const host = document.getElementById('host').value.trim();
+            const port = document.getElementById('port').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            console.log('登录信息:', { host, port, username });
+            
+            // 简单验证
+            if (!host || !port || !username || !password) {
+                alert('请填写所有字段');
+                console.log('表单验证失败，缺少必填字段');
+                return;
+            }
+            
+            // 初始化终端
+            console.log('准备初始化终端');
+            initTerminal();
+            
+            // 关闭已有连接
+            if (ws) {
+                console.log('关闭已有连接');
+                ws.close();
+            }
+            console.log('=== connectSSH 函数初始化完成 ===');
+
+            try {
+                // 建立WebSocket连接（根据当前页面协议自动选择 ws:// 或 wss://）
+                const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                // ws = new WebSocket(`${protocol}//${window.location.host}/ws`);
+                ws = new WebSocket(`${protocol}//${window.location.host}/shell/ws`);
+                
+                // 连接成功回调
+                ws.onopen = () => {
+                    terminal.write('\r\n🔌 正在连接 ' + host + ':' + port + '...\r\n');
+                    
+                    // 通知父页面：WebSocket已连接
+                    window.parent.postMessage({
+                        type: 'websocket_connected'
+                    }, '*');
+                    
+                    // 发送登录请求（包含终端初始尺寸）
+                    ws.send(JSON.stringify({
+                        type: 'login',
+                        host: host,
+                        port: port,
+                        username: username,
+                        password: password,
+                        cols: terminal.cols,
+                        rows: terminal.rows
+                    }));
+                    
+                    // 隐藏登录框，终端已常显
+                    document.getElementById('login-container').style.display = 'none';
+                    fitAddon.fit(); // 适配终端尺寸
+                    
+                    // 登录成功后，向父窗口发送终端名称
+                    const terminalName = document.getElementById('address').value.trim();
+                    if (window.parent) {
+                        window.parent.postMessage({ type: 'loginSuccess', terminalName: terminalName }, '*');
+                    }
+                };
+                
+                // 接收后端消息
+                ws.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        switch(data.type) {
+                            case 'success':
+                                terminal.write('\r\n' + data.msg + '\r\n');
+                                // 保存token到localStorage
+                                if (data.token) {
+                                    localStorage.setItem('terminal_token', data.token);
+                                    localStorage.setItem('terminal_info', JSON.stringify({
+                                        host: host,
+                                        port: port,
+                                        username: username,
+                                        connectedAt: new Date().toISOString()
+                                    }));
+                                    console.log('Token已保存:', data.token.substring(0, 8) + '...');
+                                }
+                                break;
+                            case 'error':
+                                terminal.write('\r\n❌ ' + data.msg + '\r\n');
+                                // 后端返回错误时，也显示登录窗口
+                                setTimeout(() => {
+                                    showLoginForm();
+                                }, 3000);
+                                break;
+                            case 'output':
+                                // 解码base64数据并写入终端
+                                const buffer = atob(data.data);
+                                const uint8Array = new Uint8Array(buffer.length);
+                                for (let i = 0; i < buffer.length; i++) {
+                                    uint8Array[i] = buffer.charCodeAt(i);
+                                }
+                                terminal.write(new TextDecoder('utf-8').decode(uint8Array));
+                                break;
+                        }
+                    } catch (error) {
+                        terminal.write('\r\n❌ 消息处理错误: ' + error.message + '\r\n');
+                        setTimeout(() => {
+                            showLoginForm();
+                        }, 3000);
+                    }
+                };
+
+                // 连接错误回调
+                ws.onerror = (error) => {
+                    terminal.write('\r\n❌ WebSocket连接失败: ' + (error.message || '未知错误') + '\r\n');
+                    // 立即显示登录窗口，不再等待
+                    showLoginForm();
+                };
+
+                // 连接关闭回调
+                ws.onclose = (event) => {
+                    terminal.write('\r\n🔌 SSH连接已关闭\r\n');
+                    
+                    // 通知父页面：WebSocket已断开
+                    window.parent.postMessage({
+                        type: 'websocket_disconnected'
+                    }, '*');
+                    
+                    // 清除token
+                    localStorage.removeItem('terminal_token');
+                    localStorage.removeItem('terminal_info');
+                    console.log('Token已清除');
+                    // 立即显示登录窗口，不再等待
+                    console.log('连接已关闭，准备显示登录框');
+                    // 直接显示登录框，不使用setTimeout
+                    showLoginForm();
+                    console.log('登录框已显示');
+                };
+            } catch (error) {
+                terminal.write('\r\n❌ 连接初始化失败: ' + error.message + '\r\n');
+                // 立即显示登录窗口
+                showLoginForm();
+            }
+        }
+
+        /**
+         * 显示登录表单函数
+         * 当连接失败或退出时调用，重新显示登录窗口
+         */
+        function  showLoginForm() {
+            console.log('=== showLoginForm 函数被调用 ===');
+            // 重置WebSocket连接引用
+            if (ws) {
+                console.log('重置WebSocket连接引用');
+                ws = null;
+            }
+            
+            // 显示登录框，终端已常显
+            console.log('准备显示登录框');
+            const loginContainer = document.getElementById('login-container');
+            if (loginContainer) {
+                loginContainer.style.display = 'block';
+                console.log('登录框已显示');
+            } else {
+                console.error('找不到登录框元素');
+            }
+            
+            // 重置终端（可选，根据需要决定是否重置）
+            // 如果需要完全重置终端，可以在这里添加相关代码
+            console.log('=== showLoginForm 函数执行完毕 ===');
+        }
+
+        /**
+         * 初始化终端函数
+         * 创建并配置xterm.js终端
+         */
+        function  initTerminal() {
+            if (!terminal) {
+                // 初始化xterm.js终端
+                terminal = new Terminal({
+                    fontSize: 14,          // 字体大小
+                    fontFamily: "Consolas, Monaco, monospace", // 等宽字体（仿Windows Terminal）
+                    theme: {               // 配色（接近Windows Terminal默认深色主题）
+                        background: '#000000',
+                        foreground: '#ffffff',
+                        cursor: '#ffffff',
+                        selection: '#444444'
+                    },
+                    cursorBlink: true,     // 光标闪烁
+                    scrollback: 1000,      // 回滚缓存行数
+                    tabStopWidth: 4        // Tab键宽度
+                });
+
+                // 加载fit插件（自动适配容器尺寸）
+                fitAddon = new FitAddon.FitAddon();
+                terminal.loadAddon(fitAddon);
+
+                // 将终端挂载到容器
+                const container = document.getElementById('terminal-container');
+                terminal.open(container);
+                
+                // 监听终端输入（将用户输入发送到后端）
+                terminal.onData((data) => {
+                    if (ws && ws.readyState === WebSocket.OPEN) {
+                        ws.send(JSON.stringify({
+                            type: 'command',
+                            data: data
+                        }));
+                    } else {
+                        terminal.write('\r\n❌ 请先连接SSH服务器！\r\n');
+                        // 直接显示登录框，不再等待用户输入
+                        showLoginForm();
+                    }
+                });
+                
+                // 监听窗口大小变化，调整终端尺寸
+                window.addEventListener('resize', () => {
+                    if (fitAddon) {
+                        fitAddon.fit();
+                        if (ws && ws.readyState === WebSocket.OPEN) {
+                            ws.send(JSON.stringify({
+                                type: 'resize',
+                                cols: terminal.cols,
+                                rows: terminal.rows
+                            }));
+                        }
+                    }
+                });
+            }
+        }
+
+        /**
+         * 模拟打字函数
+         * @param {string} text - 要输入的文本
+         * @param {number} speed - 打字速度（毫秒/字符），默认为30ms
+         * @param {boolean} enter - 是否自动按回车键，默认为true
+         */
+        function simulateTyping(text, speed = 30, enter = true) {
+            if (!terminal) {
+                console.error('终端未初始化');
+                return;
+            }
+            
+            let index = 0;
+            
+            function  typeNextChar() {
+                if (index < text.length) {
+                    const char = text[index];
+                    // 发送字符到后端（如果已连接）
+                    if (ws && ws.readyState === WebSocket.OPEN) {
+                        ws.send(JSON.stringify({
+                            type: 'command',
+                            data: char
+                        }));
+                    }
+                    index++;
+                    setTimeout(typeNextChar, speed);
+                } else if (enter) {
+                    // 打字完成后自动按回车
+                    setTimeout(() => {
+                        if (ws && ws.readyState === WebSocket.OPEN) {
+                            ws.send(JSON.stringify({
+                                type: 'command',
+                                data: '\r'
+                            }));
+                        }
+                    }, speed);
+                }
+            }
+            
+            typeNextChar();
+        }
+
+        /**
+         * 发送特殊按键
+         * @param {string} key - 按键名称
+         */
+        function sendSpecialKey(key) {
+            if (!terminal) {
+                console.error('终端未初始化');
+                return;
+            }
+            
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                console.error('WebSocket未连接');
+                return;
+            }
+            
+            let keyData = '';
+            switch(key) {
+                case 'Enter':
+                    keyData = '\r';
+                    break;
+                case 'Ctrl+C':
+                    keyData = '\x03';
+                    break;
+                case 'Ctrl+D':
+                    keyData = '\x04';
+                    break;
+                case 'Ctrl+Z':
+                    keyData = '\x1a';
+                    break;
+                default:
+                    console.warn('未知按键:', key);
+                    return;
+            }
+            
+            ws.send(JSON.stringify({
+                type: 'command',
+                data: keyData
+            }));
+        }
+
+        /**
+         * 监听来自父窗口的消息
+         * 接收打字指令并执行
+         */
+        window.addEventListener('message', (event) => {
+            // 安全检查：可以添加来源验证
+            // if (event.origin !== 'your-expected-origin') return;
+            
+            if (event.data) {
+                switch(event.data.type) {
+                    case 'typeCommand':
+                        const text = event.data.text;
+                        const speed = event.data.speed || 30;
+                        const enter = event.data.enter !== false; // 默认为true
+                        simulateTyping(text, speed, enter);
+                        break;
+                    case 'sendKey':
+                        sendSpecialKey(event.data.key);
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

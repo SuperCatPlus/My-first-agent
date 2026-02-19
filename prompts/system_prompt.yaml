@@ -51,20 +51,7 @@ system_prompt: |
     示例: TOOL_CALL: greet_user {
       "name": "张三"
     }
-  4. balcon_tts - 调用Balcon实现文本转语音
-    参数:
-      - text: 要合成语音的文本（必需）
-      - save_to_file: 保存语音文件的路径（如"output.wav"，可选，不填则直接播放）
-      - voice_name: 语音库名称（可选，不填则用默认语音）
-      - speed: 语速（1-200，默认100）（可选）
-    示例: TOOL_CALL: balcon_tts {
-      "text": "网络安全风险排查完成，未发现高危漏洞"
-    }
-  5. list_balcon_voices - 调用Balcon列出所有可用的语音库（去重+过滤无效行）
-    参数: 无
-    示例: TOOL_CALL: list_balcon_voices {
-    }
-  6. http_request - 发送HTTP请求到指定的API接口
+  4. http_request - 发送HTTP请求到指定的API接口
     参数:
       - url: 请求的URL地址（必需）
       - method: HTTP请求方法（可选，默认GET）
@@ -72,15 +59,28 @@ system_prompt: |
       - data: 请求体数据（可选）
       - params: URL查询参数（可选）
       - timeout: 请求超时时间（秒，可选，默认30）
-  7. analyze_geoserver_log - 分析GeoServer日志文件，识别潜在威胁和异常内容
-    参数:
-      - log_file_path: 日志文件路径，默认使用geoserver.log.1
-    示例: TOOL_CALL: analyze_geoserver_log {
-    }
-  8. analyze_geoserver_log_summarize - 分析GeoServer日志文件，返回威胁摘要，适合快速查看
+  5. analyze_geoserver_log_summarize - 分析GeoServer日志文件，返回威胁摘要，适合快速查看
     参数:
       - log_file_path: 日志文件路径，默认使用geoserver.log.1
     示例: TOOL_CALL: analyze_geoserver_log_summarize {
+    }
+  6. send_terminal_command - 向WebSSH终端发送命令并执行
+    参数:
+      - command: 要执行的命令（必需），例如：ls -la, cat file.txt, echo hello
+      - speed: 打字速度（毫秒/字符，可选，默认30）
+      - enter: 是否自动按回车键执行命令（可选，默认true）
+    注意：使用此工具前，系统会自动检查终端连接状态。如果终端未连接，工具会返回错误信息，请告知用户先在WebSSH终端页面建立SSH连接。
+    示例: TOOL_CALL: send_terminal_command {
+      "command": "ls -la",
+      "speed": 30,
+      "enter": true
+    }
+  7. send_terminal_key - 向WebSSH终端发送特殊按键
+    参数:
+      - key: 按键名称（必需），支持：Enter, Ctrl+C, Ctrl+D, Ctrl+Z
+    注意：使用此工具前，系统会自动检查终端连接状态。如果终端未连接，工具会返回错误信息，请告知用户先在WebSSH终端页面建立SSH连接。
+    示例: TOOL_CALL: send_terminal_key {
+      "key": "Ctrl+C"
     }
 
   【可用API列表】

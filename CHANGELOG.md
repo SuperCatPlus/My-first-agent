@@ -5,8 +5,119 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.4] - 2026-02-19
+
+### Known Issues
+
+**⚠️ Token校验代码残留问题**
+
+**问题背景：**
+由于前版本丢失导致无法回滚，在手动移除部分token校验代码后仍存在残留代码的情况。
+
+**已执行的操作：**
+- 手动移除了终端工具中的token校验逻辑（terminal_token参数）
+- 移除了工具定义文件中的terminal_token参数
+
+**当前状态：**
+仍有代码残留，主要表现在以下文件中：
+- `agent_core.py` (第139-150行)：仍保留检查TERMINAL_NOT_CONNECTED错误的逻辑
+- `prompts/system_prompt.yaml` (第72、81行)：仍包含"终端未连接"的提示说明
+- `web_server.py` (第172行)：仍保留terminal_status路由
+
+**潜在风险：**
+该残留代码可能导致大模型在调用终端工具时出现"终端未连接"错误提示，即使终端实际已连接。具体表现为：
+- 日志记录显示：`'error': 'TERMINAL_NOT_CONNECTED'`
+- 用户收到错误信息："终端未连接\n\n请先在WebSSH终端页面建立SSH连接，然后再执行命令"
+
+**涉及文件：**
+- `tools/implementations/terminal_tools.py` - 终端工具实现
+- `prompts/system_prompt.yaml` - 系统提示词
+- `agent_core.py` - 智能体核心逻辑
+- `WebSHell.py` - WebSocket SSH连接处理
+- `web_server.py` - Web服务器路由
+- `config.py` - 配置文件s
 
 
+
+## [1.3.3] - 2026-02-15
+
+### Added
+- ✨ 添加 WebShellHandler 类，支持 WebShell.html 页面访问
+- 🎨 实现登录框覆盖在终端背景上的布局效果
+
+
+### Changed
+- 🎨 移除前端页面滚动条，优化界面显示效果
+- 🎨 移除 xterm.js 终端内部滚动条，保持界面整洁
+- 🔄 优化拖拽逻辑，使面板可以自由放大和缩小
+- 🚀 优化拖拽性能，拖拽时降低 iframe 透明度，减少重绘开销
+- 🎨 将右侧侧边栏修改为胶囊风格
+- ✨ 为选项卡添加关闭按钮，增加视觉效果
+- 🎨 优化选项卡悬停效果和激活状态样式
+- 🎨 优化 FAB 按钮，添加 user-select: none 防止快速点击时触发文本选择（拖蓝）
+- 🔄 改进 toggleTerm 函数，添加事件处理和 preventDefault 以提升点击体验
+- 🚀 优化侧边栏打开动画，延迟渲染内容以减少卡顿
+- 🎨 优化 WebSHell.html 页面，应用美观的登录框样式
+- 🔄 实现先连接后显示终端的功能逻辑
+- 🔄 改进 SSH 连接失败或退出时的处理逻辑，自动重新显示登录框
+- 🔄 优化 WebSHell.py 中的 SSH 通道状态检测，确保输入 exit 后能正确关闭连接
+- 🔄 实现登录成功后自动更新终端标签文本为 address 输入框的值
+- 🌐 添加 postMessage 消息传递机制，实现 iframe 与父窗口间的通信
+
+### Fixed
+- 🐛 修复输入 exit 后后端连接没有真正断开的问题
+- 🐛 修复连接失败时不重新显示登录框的问题
+- 🐛 修复退出连接时不重新显示登录框的问题
+- 🐛 修复 HTTPS 页面无法建立 WebSocket 连接的问题（自动根据页面协议选择 ws:// 或 wss://）
+
+## [1.3.2] - 2026-02-14
+
+### Fixed
+- 🐛 修复 SSH 连接后无法输入命令的问题（正确启动异步读取循环）
+
+### Changed
+- 🎨 确立了前端大致的样式布局
+- 🔄 将前端 HTML 代码从 Python 文件中剥离，创建独立的 WebSHell.html 文件
+- ⚙️ 配置静态文件路由，支持本地 xterm.js 文件访问
+
+### Removed
+- 🗑️ 移除了语音模块
+
+## [1.3.1] - 2026-02-13
+
+### Added
+- ✨ 创建WebSHell中间层，处理SSH连接和数据交互
+- 🚀 初始项目结构搭建
+- 📄 基础HTML页面创建
+- 📦 引入xterm终端库
+
+### Fixed
+- 🐛 修复了用户胶囊(英文和数字)无法正常换行问题
+
+## [1.3.0] - 2026-02-12
+
+### Added
+- 📄 创建demo.html示例页面
+- 📦 引入xterm.min.css样式文件
+- 📦 引入xterm.min.js终端库
+
+### Changed
+- 🎨 优化页面结构
+- ✨ 完善终端功能集成
+
+### Fixed
+- 🐛 解决终端显示问题
+
+## [1.2.4] - 2026-02-10
+
+### Changed
+- 🚀 开始制作Web Terminal
+- 🎨 修改前端对话样式
+
+## [1.2.3] - 2026-02-05
+
+### Added
+- 🌐 零时增加了web页面
 
 ## [1.2.2] - 2026-02-04
 
@@ -94,8 +205,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🎨 更新了 README.md：添加语音工具相关信息
 
 ### Fixed
-- 🐛 修复了语音工具参数名不一致问题
-- 🐛 解决了工具调用后回复不触发语音播报的问题
+- 🐛 修复了工具参数名不一致问题
 
 ## [0.1.0] - 2026-01-27
 
@@ -107,6 +217,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - 📝 完善了项目文档
+- ✨ 新增功能
+- 🔄 改进/优化
+- 🎨 样式/界面
+- 🚀 性能/启动
+- 🐛 修复
+- 🗑️ 删除
+- 🌐 网络/API
+- 📦 依赖/库
+- ⚙️ 配置
 
 [Unreleased]: https://github.com/yourusername/yourproject/compare/v1.2.2...HEAD
 [1.2.2]: https://github.com/SuperCatPlus/My-first-agent

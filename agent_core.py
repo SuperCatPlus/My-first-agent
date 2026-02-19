@@ -88,8 +88,15 @@ class AgentCore:
         
         return None
     
-    def process_message(self, user_message: str) -> str:
-        """处理用户消息"""
+    def process_message(self, user_message: str) -> Dict[str, Any]:
+        """处理用户消息，返回响应和终端命令
+        
+        Args:
+            user_message: 用户消息
+        """
+        # 初始化终端命令列表
+        terminal_commands = []
+        
         # 构建消息历史
         messages = [
             {"role": "system", "content": self.system_prompt},
@@ -112,6 +119,37 @@ class AgentCore:
                 # 执行工具
                 tool_result = self.tool_registry.execute_tool(tool_name, **tool_params)
                 
+                # 检查是否是终端工具，收集终端命令
+                if tool_name in ['send_terminal_command', 'send_terminal_key']:
+                    # 检查工具执行是否成功
+                    if tool_result.get("success", False):
+                        if tool_name == 'send_terminal_command':
+                            terminal_commands.append({
+                                "type": "command",
+                                "text": tool_params.get('command', ''),
+                                "speed": tool_params.get('speed', 30),
+                                "enter": tool_params.get('enter', True)
+                            })
+                        elif tool_name == 'send_terminal_key':
+                            terminal_commands.append({
+                                "type": "key",
+                                "key": tool_params.get('key', '')
+                            })
+                    else:
+                        # 终端未连接，返回错误信息
+                        error_msg = tool_result.get("message", "终端未连接")
+                        hint = tool_result.get("hint", "")
+                        
+                        # 更新对话历史
+                        self.conversation_history.append({"role": "user", "content": user_message})
+                        self.conversation_history.append({"role": "assistant", "content": f"{error_msg}\n\n{hint}"})
+                        
+                        return {
+                            "response": f"{error_msg}\n\n{hint}",
+                            "terminal_commands": terminal_commands,
+                            "error": "TERMINAL_NOT_CONNECTED"
+                        }
+                
                 # 将工具结果作为系统消息添加到对话中
                 result_message = {
                     "role": "system",
@@ -129,47 +167,27 @@ class AgentCore:
                 self.conversation_history.append({"role": "user", "content": user_message})
                 self.conversation_history.append({"role": "assistant", "content": final_message})
                 
-                # 自动语音播报：回复长度<=200字时发声，或用户输入包含"耄耋"时强制发声（工具调用后的回复）
-                should_speak = len(final_message) <= 200 or "耄耋" in user_message
-                if should_speak:
-                    try:
-                        # 自动调用语音工具朗读回复
-                        self.tool_registry.execute_tool(
-                            "balcon_tts",
-                            text=final_message,
-                            voice_name="Microsoft Xiaoxiao"
-                        )
-                    except Exception as e:
-                        # 语音播报失败不影响回复
-                        print(f"自动语音播报失败: {e}")
-                
-                return final_message
+                # 返回响应和终端命令
+                return {
+                    "response": final_message,
+                    "terminal_commands": terminal_commands
+                }
                 
             except Exception as e:
                 error_message = f"执行工具 {tool_name} 失败: {str(e)}"
-                return error_message
+                return {
+                    "response": error_message,
+                    "terminal_commands": terminal_commands
+                }
         else:
-            # 没有工具调用，检查回复长度并自动调用语音工具（短文本）
+            # 没有工具调用
             self.conversation_history.append({"role": "user", "content": user_message})
             self.conversation_history.append({"role": "assistant", "content": assistant_message})
             
-            # 自动语音播报：回复长度<=200字时发声，或用户输入包含"耄耋"时强制发声
-            # 但不播报工具调用格式
-            if not self._extract_tool_call(assistant_message):
-                should_speak = len(assistant_message) <= 200 or "耄耋" in user_message
-                if should_speak:
-                    try:
-                        # 自动调用语音工具朗读回复
-                        self.tool_registry.execute_tool(
-                            "balcon_tts",
-                            text=assistant_message,
-                            voice_name="Microsoft Xiaoxiao"
-                        )
-                    except Exception as e:
-                        # 语音播报失败不影响回复
-                        print(f"自动语音播报失败: {e}")
-            
-            return assistant_message
+            return {
+                "response": assistant_message,
+                "terminal_commands": terminal_commands
+            }
     
     def clear_history(self) -> None:
         """清除对话历史"""

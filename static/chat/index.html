@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>粮库智能体</title>
+    <!-- <link rel="stylesheet" href="/css/xterm.min.css">
+    <script src="/lib/xterm.min.js"></script> -->
+    <link rel="stylesheet" href="css/index.css">
+    <script src="/common/base.js">//src = "static\common\base.js"</script>
+</head>
+<body>
+
+<div class="app-container" id="app">
+    <div class="activity-bar">
+        <div class="icon-btn active">💬</div>
+        <div class="icon-btn">⚡</div>
+    </div>
+
+    <div class="sub-panel" id="side-panel">
+        <div style="padding: 24px; width: 280px;">
+            <h3>近期对话</h3>
+            <p style="color:#666; font-size:14px">如何自动化部署项目AA...</p>
+        </div>
+    </div>
+
+    <div class="chat-area">
+        <div class="icon-btn" style="position: absolute; top: 10px; left: 10px; z-index: 10;" onclick="togglePin()">📌</div>
+        <div class="chat-main">
+            <div class="message-container">
+                <div class="ai-msg">
+                    你好！我是你的 AI 助手。我已经优化了布局：<br><br>
+                    • <b>无抖动悬浮</b>：尝试鼠标滑过左侧图标。<br>
+                    • <b>简约风格</b>：更干净的对话排版和胶囊输入框。<br>
+                    • <b>终端/文档拖拽</b>：点击右下角打开面板，尝试拖动它的左边缘，支持切换终端和文档视图。
+                </div>
+            </div>
+        </div>
+        <!-- 输入盒子 -->
+        <div class="input-container">
+            <div class="input-wrapper">
+                <input type="text" class="chat-input" id="userInput" placeholder="向 Catto Bot  提问">
+                <button id="sendBtn" style="border:none; background:none; cursor:pointer; color:var(--primary); font-weight:bold;">发送</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="resizer" id="resizer"></div>
+
+    <!-- 右侧面板-->
+    <div class="term-panel" id="term-panel">
+        <!-- 选项框 -->
+        <div class="panel-tabs">
+            <button class="tab-btn active" data-tab="terminal">
+                终端
+                <span class="tab-close">×</span>
+            </button>
+            <button class="tab-btn" data-tab="document">
+                AI文档
+                <span class="tab-close">×</span>
+            </button>
+        </div>
+        <div class="panel-content">
+            <!-- 终端内容 -->
+            <div class="tab-content active" id="terminal-content">
+                <!-- <div id="terminal-box"></div> -->
+                <!-- <iframe src="http://172.16.37.208:3000" frameborder="0"></iframe> -->
+                <!-- /shell/就是static\shell\WebSHell.html -->
+                <iframe class="iframe-web-terminal" src="/shell/" frameborder="0"></iframe>
+            </div>
+            <div class="tab-content" id="document-content">
+                <div id="document-box">
+                    <div class="document-content">
+                        <h2>AI 生成文档预览</h2>
+                        <p>这里会显示 AI 生成的文档内容。</p>
+                        <hr>
+                        <h3>示例文档</h3>
+                        <p>这是一个示例文档内容，你可以通过 JavaScript 动态替换这里的内容，支持 Markdown 渲染（需引入 Markdown 解析库）。</p>
+                        <ul>
+                            <li>支持富文本格式</li>
+                            <li>支持代码块高亮</li>
+                            <li>支持图片展示</li>
+                        </ul>
+                        <pre><code>
+// 示例代码块
+function renderAIDocument(content) {
+    document.querySelector('.document-content').innerHTML = content;
+}
+                        </code></pre>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                        <h2>AI 生成文档预览</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fab" id="fab" onclick="toggleTerm(event)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="4 17 10 11 4 5"></polyline>
+        <line x1="12" y1="19" x2="20" y2="19"></line>
+    </svg>
+</div>
+
+<script src="js/index.js"></script>
+<!-- <script src="js/Message.js"></script> -->
+<script>
+// 监听来自iframe的消息（WebSocket状态变化）
+window.addEventListener('message', function(event) {
+    // 安全检查：确保消息来自同源
+    if (event.origin !== window.location.origin) {
+        return;
+    }
+    
+    if (event.data.type === 'websocket_connected') {
+        console.log('收到WebSocket连接通知');
+        
+        // 设置Cookie：终端已连接
+        document.cookie = 'terminal_connected=true; path=/';
+        console.log('Cookie已设置: terminal_connected=true');
+        
+    } else if (event.data.type === 'websocket_disconnected') {
+        console.log('收到WebSocket断开通知');
+        
+        // 设置Cookie：终端已断开
+        document.cookie = 'terminal_connected=false; path=/';
+        console.log('Cookie已设置: terminal_connected=false');
+    }
+});
+</script>
+</body>
+</html>

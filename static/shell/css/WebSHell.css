@@ -1,0 +1,124 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+        /* 页面样式 */
+        body {
+            background: #1e1e1e;
+            font-family: "Consolas", "Monaco", monospace;
+            min-height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        /* 登录框样式 */
+        .login-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(45, 45, 45, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .login-container:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+        }
+        /* 标题样式 */
+        .login-title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        /* 表单组样式 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #b0b0b0;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #3d3d3d;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #0078d7;
+            box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.1);
+            background: #434343;
+        }
+        /* 按钮样式 */
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: #0078d7;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+            font-family: inherit;
+        }
+        .login-button:hover {
+            background: #005a9e;
+            transform: translateY(-1px);
+        }
+        .login-button:active {
+            transform: translateY(0);
+        }
+        /* 终端容器样式 */
+        .terminal-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 20px;
+            display: block;
+            z-index: 1;
+        }
+        #terminal-container {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        /* 移除xterm.js终端内部滚动条 */
+        .xterm-viewport {
+            overflow: hidden !important;
+        }
+        /* 响应式设计 */
+        @media (max-width: 500px) {
+            .login-container {
+                margin: 0 20px;
+                padding: 30px 25px;
+                width: calc(100% - 40px);
+            }
+            .login-title {
+                font-size: 20px;
+                margin-bottom: 25px;
+            }
+            .terminal-wrapper {
+                padding: 10px;
+            }
+        }

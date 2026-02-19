@@ -3,15 +3,29 @@ import logging
 from typing import Dict, Any
 
 
+# 创建 log 目录
+log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'log')
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
 # 全局日志配置（只初始化一次）
 logging.basicConfig(
-    filename='Function.log',  
+    filename=os.path.join(log_dir, 'global_debug.log'),  
     filemode='a',  
     level=logging.INFO,
     format='%(asctime)s - %(module)s - %(funcName)s - %(levelname)s: %(message)s',  
     datefmt='%Y-%m-%d %H:%M:%S',
     encoding='utf-8'
 )
+
+# logging.basicConfig(
+#     filename='global_debug.log',  
+#     filemode='a',  
+#     level=logging.INFO,
+#     format='%(asctime)s - %(module)s - %(funcName)s - %(levelname)s: %(message)s',  
+#     datefmt='%Y-%m-%d %H:%M:%S',
+#     encoding='utf-8'
+# )
 
 
 class Config:
@@ -31,12 +45,15 @@ class Config:
     # 后端API配置
     BACKEND_API_BASE = "http://127.0.0.1:8002"
     
+    # 日志文件配置
+    DEFAULT_LOG_FILE_PATH = "g:\\phpstudy_pro\\.jqgh\\NewInformationTechnology\\Agent\\geoserver.log.1"
+    
     # 模型参数
     MODEL_PARAMS = {
         "temperature": 0.7,
         "top_p": 0.9,
         "max_tokens": 1000,
-        "stream": False
+        "stream": False     
     }
     
     @classmethod

@@ -1,0 +1,43 @@
+{
+    "tools": [
+        {
+            "name": "send_terminal_command",
+            "description": "向WebSSH终端发送命令并执行。使用此工具可以在终端中执行命令，如查看文件、运行程序等。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "command": {
+                        "type": "string",
+                        "description": "要执行的命令，例如：ls -la, cat file.txt, echo hello"
+                    },
+                    "speed": {
+                        "type": "number",
+                        "description": "打字速度（毫秒/字符），默认为30ms",
+                        "default": 30
+                    },
+                    "enter": {
+                        "type": "boolean",
+                        "description": "是否自动按回车键执行命令，默认为true",
+                        "default": true
+                    }
+                },
+                "required": ["command"]
+            }
+        },
+        {
+            "name": "send_terminal_key",
+            "description": "向WebSSH终端发送特殊按键，如Enter、Ctrl+C等",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "按键名称，支持：Enter, Ctrl+C, Ctrl+D, Ctrl+Z",
+                        "enum": ["Enter", "Ctrl+C", "Ctrl+D", "Ctrl+Z"]
+                    }
+                },
+                "required": ["key"]
+            }
+        }
+    ]
+}

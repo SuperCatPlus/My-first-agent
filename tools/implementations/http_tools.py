@@ -12,7 +12,7 @@ class HttpTools:
         """
         发送HTTP请求到指定的API接口
         
-        参数:
+        Args:
             url (str): 请求的URL地址
             method (str): HTTP请求方法，默认为GET
             headers (dict): 请求头信息
@@ -96,7 +96,7 @@ class HttpTools:
         """
         调用/api/get-log-last-lines接口获取日志最后几行，用于查看是否有渗透痕迹
         
-        参数:
+        Args:
             lines_count (int): 获取的日志行数，可不填，默认50行
         
         返回:

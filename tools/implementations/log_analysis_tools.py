@@ -2,6 +2,7 @@ import re
 from datetime import datetime
 from typing import Dict, List, Optional
 from .log_decorator import log_tool_call
+from config import config
 
 # 全局正则表达式：适配GeoServer日志格式（syslog封装+中文月份）
 PATTERN_GEOSERVER_CORE = re.compile(
@@ -264,7 +265,7 @@ class LogAnalysisTools:
         分析GeoServer日志文件，识别潜在威胁
         
         参数:
-            log_file_path (str): 日志文件路径，默认使用geoserver.log.1
+            log_file_path (str): 日志文件路径，默认使用配置中的路径
         
         返回:
             dict: 分析结果，包含威胁统计和详细信息
@@ -272,7 +273,7 @@ class LogAnalysisTools:
         try:
             # 使用默认日志文件路径
             if log_file_path is None:
-                log_file_path = "geoserver.log.1"
+                log_file_path = config.DEFAULT_LOG_FILE_PATH
             
             # 初始化解析器
             parser = GeoServerLogParser()
@@ -344,7 +345,7 @@ class LogAnalysisTools:
         分析GeoServer日志文件，返回威胁摘要
         
         参数:
-            log_file_path (str): 日志文件路径，默认使用geoserver.log.1
+            log_file_path (str): 日志文件路径，默认使用配置中的路径
         
         返回:
             dict: 分析摘要，包含威胁统计和关键信息

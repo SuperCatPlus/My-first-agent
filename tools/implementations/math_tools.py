@@ -50,7 +50,7 @@ class MathTools:
     
     @staticmethod
     @log_tool_call
-    def greet_user(name: str) -> Dict[str, str]:
+    def greet_user(name: str = None) -> Dict[str, str]:
         """
         问候用户
         

@@ -9,7 +9,7 @@ from config import config
 from tool_registry import ToolRegistry
 from agent_core import AgentCore
 
-import base_init
+# import base_init
 from colorama import init as colorama_init, Fore, Style
 colorama_init(autoreset=True)   #字体
 
